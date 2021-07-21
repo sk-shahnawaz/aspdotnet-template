@@ -47,6 +47,11 @@ This is main web API project containing all the API resources.
 | PGUSER | PostgreSQL user name |
 | PGDATABASE | PostgreSQL database name |
 | PGVERSION | PostgreSQL version |
+| SQLHOST | SQL Server host name |
+| SQLPORT | SQL Server port number |
+| SQLPASSWORD | SQL Server password |
+| SQLUSER | SQL Server user name |
+| SQLDATABASE | SQL Server database name |
 
 ## Build & Run Process 	
 
@@ -99,5 +104,5 @@ If, from a controller action, an operation (method) is invoked on a Thread Pool 
 control comes in that method, the caller controller action method finishes executing and thus runtime disposes all dependent objects
 like database context. Iin order to use such dependent objects we have to pass an instance of IServiceScopeFactory and then obtain a new
 scope which then can be used to get the required dependent object. 
-This concept is used in DeviceController.cs file's ValidateDataAndImport() method of Litetracking repository.
+
 Visit: https://stackoverflow.com/q/39109234/4287015 for more (Accessed on 2021-05-07).

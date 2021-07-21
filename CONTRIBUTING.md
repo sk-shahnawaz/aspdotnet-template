@@ -7,18 +7,18 @@ cd <LOCATION_IN_FILE_SYSTEM_WHERE_PROJECT_WILL_BE_HOSTED>
 git clone <GIT_HUB_REPO_URL>
 ```
 
-There is one permanent branch in this repository: **'main'**.
-Direct commits to *'main'* is *prohibited*. Instead a developer should start his/her work by first taking latest from 'main' branch.
+There is one permanent branch in this repository: **'master'**.
+Direct commits to *'master'* is *prohibited*. Instead a developer should start his/her work by first taking latest from 'master' branch.
 
-#### Take latest from 'main'
+#### Take latest from 'master'
 ```
 cd <LOCATION_IN_FILE_SYSTEM_WHERE_PROJECT_IS_HOSTED>
-git switch main
+git switch master
 git fetch
 git pull
 ```
 
-#### Create a new feature branch from 'main' by using the following command
+#### Create a new feature branch from 'master' by using the following command
 ```
 git checkout -b <TYPE_OF_WORK>/<NAME_OF_BRANCH>
 ```
@@ -36,7 +36,8 @@ Please see [https://www.conventionalcommits.org/en/v1.0.0](GitHub Conventional C
 ```
 git add . 
 ```
-or stage selective files:
+or 
+stage selective files:
 ```
 git add file1.cs file2.cs
 ```
@@ -61,8 +62,8 @@ Example:
 ### GitHub Workflow
 - Upon pushing new branch to GitHub, PR needs to be created, please assign yourself and your supervisor as the reviewer.
 - Address PR comments (if any, by changing implementation, committing into your local repository branch and pushing to GitHub again as a commit into the same GitHub branch).
-- When PR is approved, need to merge it to 'main'. This can be done in GitHub PR's UI itself.
-- Upon merging to 'main', GitHub Actions defined in 'main' branch gets triggered.
+- When PR is approved, need to merge it to 'master'. This can be done in GitHub PR's UI itself.
+- Upon merging to 'master', GitHub Actions defined in 'master' branch gets triggered.
 
 #### PR Title
 PR title has to follow defined convention in order for the CI/CD to work. This is defined as:
