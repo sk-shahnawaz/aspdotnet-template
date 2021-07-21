@@ -47,6 +47,11 @@ This is main web API project containing all the API resources.
 | PGUSER | PostgreSQL user name |
 | PGDATABASE | PostgreSQL database name |
 | PGVERSION | PostgreSQL version |
+| SQLHOST | SQL Server host name |
+| SQLPORT | SQL Server port number |
+| SQLPASSWORD | SQL Server password |
+| SQLUSER | SQL Server user name |
+| SQLDATABASE | SQL Server database name |
 
 ## Build & Run Process 	
 
