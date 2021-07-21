@@ -1,6 +1,7 @@
 name: Labeler Action
 on:
   - pull_request
+  - push
 
 jobs:
   triage:
