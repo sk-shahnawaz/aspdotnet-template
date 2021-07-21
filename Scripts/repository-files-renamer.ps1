@@ -15,13 +15,13 @@ $componentNamePartsToReplace = @("ASP.NET-Core", "NET-Core.Console.DB", "NET-Cor
 $namespacePartsToReplace = @("ASP.NET.Core.WebAPI", "NET.Core.Console.DB", "NET.Core.Library", "NET.Core.XUnit")		# NAMESPACE PARTS [THIS STRINGS ARE PRESENT IN THE C# NAMESPACES OF THE TEMPLATE REPOSITORY]
 
 $phrasesToReplace = $componentNamePartsToReplace + $namespacePartsToReplace
-$toBeReplacedBy = "EmployeeManagementSystem"																			# DIRECTORY / FILE NAMES WILL BE REPLACED BY THIS STRING
+$toBeReplacedBy = "AuthorManagementSystem"																			# DIRECTORY / FILE NAMES WILL BE REPLACED BY THIS STRING
 
 $oldDocumentationHeading = "# ASP.NET Core Template"																	# TEMPLATE REPOSITORY MAIN README FILE HEADING TEXT
-$newDocumentationHeading = "# Employee Management System"																# MAIN README FILE HEADING TEXT WILL BE REPLACED BY THIS STRING
+$newDocumentationHeading = "# Author Management System"																# MAIN README FILE HEADING TEXT WILL BE REPLACED BY THIS STRING
 
 $oldApplicationName = "aspdotnet-template"																				# GITHUB REPOSITORY LINK OF TEMPLATE REPOSITORY CONTAINS THIS TEXT, PUBLISH ACTION CONTAINS THIS TEXT AS APPLICATION NAME
-$newApplicationName = "employee-management-system"																		# WILL BE REPLACED BY THIS STRING
+$newApplicationName = "author-management-system"																		# WILL BE REPLACED BY THIS STRING
 # GLOBAL VARIABLES END
 
 # FUNCTIONS START
@@ -187,7 +187,7 @@ function RemovePreviousBuildArtifacts($artifactDirectories)
 
 # MAIN SCRIPT START
 Write-Host ""
-Write-Host "++++ QUANTUM INVENTIONS | ASP.NET TEMPLATE | COMPONENT RENAMING SCRIPT +++++" -ForegroundColor Yellow
+Write-Host "++++ ASP.NET CORE WEB API TEMPLATE | COMPONENT RENAMING SCRIPT +++++" -ForegroundColor Yellow
 Write-Host "SCRIPT EXECUTION STARTED"
 Write-Host "STAGE 1" -ForegroundColor Red
 Write-Host "PRE-PROCESSING STAGE STARTED"
