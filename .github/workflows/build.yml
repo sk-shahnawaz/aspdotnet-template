@@ -1,0 +1,31 @@
+name: Build Action
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - name: Set .NET 5 SDK ${{ matrix.dotnet }}
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 5.0.x
+      - name: Get .NET Version Information & NUGET Sources
+        run: |
+          dotnet nuget list source
+          dotnet --version
+      - name: Install Dependencies
+        run: dotnet restore
+      - name: Build with .NET
+        run: dotnet build --force --verbosity minimal --configuration Release --no-restore
+      - name: Test with .NET
+        working-directory: ./NET-Core.XUnit.UnitTests
+        run: dotnet test --settings "test.runsettings" --configuration Release

@@ -1,0 +1,36 @@
+﻿version: '3.7'
+services:
+ application:
+  container_name: application 
+  build:
+   context: .
+   network: host
+  ports:
+   - "8585:80"
+  environment:
+   ENV: dev
+   ASPNETCORE_ENVIRONMENT: Production
+   PGHOST: localhost
+   PGPORT: 5432
+   PGPASSWORD: postgres
+   PGUSER: postgres
+   PGDATABASE: test-db-postgres
+   PGVERSION: 11.8
+   SERILOG_LOGGING_LEVEL: information
+   SENTRY_ENVIRONMENT: local-docker
+  
+ db:
+    container_name: postgres-container
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: test-db-postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - appdata:/var/lib/postgres
+      
+volumes:
+  appdata:

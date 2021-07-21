@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+	<!-- Parameters used by tests at run time -->
+	<TestRunParameters>
+		<Parameter name="{PARAM_NAME}" value="{PARAM_VALUE}" />
+	</TestRunParameters>
+	<RunConfiguration>
+		<EnvironmentVariables>
+			<ENV_NAME>{ENV_VALUE}</ENV_NAME>
+		</EnvironmentVariables>
+	</RunConfiguration>
+</RunSettings>
