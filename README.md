@@ -8,7 +8,6 @@ Best practices related to .NET Development have been followed while developing t
 ## Badges
 
 ![build](https://github.com/shahnawaz-qi/aspdotnet-template/actions/workflows/build.yml/badge.svg)
-[![GitHub Super-Linter](https://github.com/shahnawaz-qi/aspdotnet-template/workflows/Linter/badge.svg)](https://github.com/marketplace/actions/super-linter)
 
 ## Contributions
 
