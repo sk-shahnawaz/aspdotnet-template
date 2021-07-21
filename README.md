@@ -8,7 +8,6 @@ Best practices related to .NET Development have been followed while developing t
 ## Badges
 
 ![build](https://github.com/shahnawaz-qi/aspdotnet-template/actions/workflows/build.yml/badge.svg)
-[![GitHub Super-Linter](https://github.com/shahnawaz-qi/aspdotnet-template/workflows/Linter/badge.svg)](https://github.com/marketplace/actions/super-linter)
 
 ## Contributions
 
@@ -29,7 +28,7 @@ Please read [CONTRIBUTING.md](/CONTRIBUTING.md) before starting to contribute in
 - .NET 5 (.NET Core 5) SDK & Runtime
 - .NET CLI
 - EF Core Command Line Tool v.5.0.6+
-- PostgreSQL v13.2 / SQL Server 2019 Express Edition with SQL Server Authentication
+- PostgreSQL v13.2 / SQL Server 2017 Express Edition with SQL Server Authentication
 - Visual Studio 2019 v16.10.0+ / Visual Studio Code with appropriate extensions installed
 - Docker v20.10.6 build 370c289 or above
 - Docker Compose v3.7+
