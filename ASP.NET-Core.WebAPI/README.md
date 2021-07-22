@@ -25,7 +25,7 @@ This is main web API project containing all the API resources.
 
 ### AppSettings.json
 
-- **USE_IN_MEMORY_DATABASE** [true/false], when set to true, application uses in-memory database, when set to false, tries to configure and use PostgreSQL database
+- **USE_IN_MEMORY_DATABASE** [true/false], when set to true, application uses in-memory database, when set to false, tries to configure and use PostgreSQL / SQL Server database as per configuration
 - **IN_MEMORY_DATABASE_NAME**, Name of the in-memory database, considered only when '*USE_IN_MEMORY_DATABASE*' is set to *true*
 - **USE_POSTGRESQL_DB** [true/false], when set to true, application configures and uses PostgreSQL as persisitent medium, note that this works only when '*USE_IN_MEMORY_DATABASE*' is set to *false*
 - **USE_SQLSERVER_DB** [true/false], when set to true, application configures and uses Microsoft SQL Server as persisitent medium, note that this works only when '*USE_IN_MEMORY_DATABASE*' is set to *false*, furthermore, when both PostgrSQL & SQL Server are enabled, PostgreSQL will get higher preference
