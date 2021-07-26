@@ -25,10 +25,11 @@ Please read [CONTRIBUTING.md](/CONTRIBUTING.md) before starting to contribute in
 
 ##  Pre-requisites
 
+- Git Version Control System
 - .NET 5 (.NET Core 5) SDK & Runtime
 - .NET CLI
 - EF Core Command Line Tool v.5.0.6+
-- PostgreSQL v13.2 / SQL Server 2017 Express Edition with SQL Server Authentication enabled
+- PostgreSQL v13.2 / SQL Server 2017+ (atleast Express Edition) with SQL Server Authentication enabled
 - Visual Studio 2019 Community Edition v16.10.0+ / Visual Studio Code with appropriate extensions installed
 - Docker v20.10.6 build 370c289 or above
 - Docker Compose v3.7+
