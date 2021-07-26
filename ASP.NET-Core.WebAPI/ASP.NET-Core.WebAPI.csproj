@@ -17,7 +17,7 @@
 		<NoWarn>$(NoWarn);1591</NoWarn>
 		<Company>Shahnawaz-QI</Company>
 		<Description>Sample ASP.NET Core Web API project.</Description>
-		<Authors>Sk Shahnawaz Ul Haque</Authors>
+		<Authors>Sk Shahnawaz-ul Haque</Authors>
 	</PropertyGroup>
 	
   <ItemGroup>

@@ -5,7 +5,7 @@
     <RootNamespace>NET.Core.Library.Domain</RootNamespace>
     <Company>Shahnawaz-QI</Company>
     <Description>Sample domain project.</Description>
-    <Authors>Sk Shahnawaz Ul Haque</Authors>
+    <Authors>Sk Shahnawaz-ul Haque</Authors>
   </PropertyGroup>
 
   <ItemGroup>

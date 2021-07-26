@@ -6,7 +6,7 @@
     <RootNamespace>NET.Core.Console.DB.PostgreSQL</RootNamespace>
     <Company>Shahnawaz-QI</Company>
     <Description>Sample PostgreSQL database specific project.</Description>
-    <Authors>Sk Shahnawaz Ul Haque</Authors>
+    <Authors>Sk Shahnawaz-ul Haque</Authors>
   </PropertyGroup>
 
   <ItemGroup>
