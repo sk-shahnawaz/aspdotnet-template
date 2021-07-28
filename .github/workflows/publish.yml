@@ -3,10 +3,6 @@ on:
   release:
     types:
        - created
-       - edited
-       - prereleased
-       - released
-       - published
 jobs:
   build:
     runs-on: ubuntu-latest
