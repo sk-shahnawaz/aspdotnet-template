@@ -1,11 +1,12 @@
 name: Publish Action
 on:
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
+  release:
+    types:
+       - created
+       - edited
+       - prereleased
+       - released
+       - published
 jobs:
   build:
     runs-on: ubuntu-latest
