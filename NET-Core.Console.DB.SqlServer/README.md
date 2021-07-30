@@ -4,7 +4,7 @@
 
 This is project for running SQL Server DB migrations as console application.
 
-## Project structure
+## Project Structure
 | Directory Name | Usage |
 |----------------|-------|
 | Migrations | Contains all the Entity Framework Core migration files |
