@@ -1,0 +1,80 @@
+{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:6776",
+      "sslPort": 44303
+    }
+  },
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+    "profiles": {
+        "IIS Express": {
+            "commandName": "IISExpress",
+            "launchBrowser": true,
+            "launchUrl": "swagger",
+            "environmentVariables": {
+                "SENTRY_RELEASE": "",
+                "SENTRY_MINIMUM_EVENT_LEVEL": "",
+                "SERILOG_LOGGING_LEVEL": "Information",
+                "SENTRY_ENVIRONMENT": "",
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "SENTRY_DSN": "",
+                "USE_IN_MEMORY_DATABASE": "true",
+                "IN_MEMORY_DATABASE_NAME": "AppDemoDb",
+                "USE_POSTGRESQL_DB": "false",
+                "USE_SQLSERVER_DB": "false",
+                "ENABLE_ODATA": "true",
+                "PGHOST": "localhost",
+                "PGPORT": "5432",
+                "PGPASSWORD": "postgres",
+                "PGUSER": "postgres",
+                "PGDATABASE": "test-db-postgres",
+                "PGVERSION": "11.8",
+                "SQLHOST": "IN-LT-42\\SQLEXPRESS",
+                "SQLPORT": "1433",
+                "SQLPASSWORD": "sa12345as",
+                "SQLUSER": "sa",
+                "SQLDATABASE": "test-db-sqlserver"
+            }
+        },
+        "ASP.NET.Core.WebAPI": {
+            "commandName": "Project",
+            "launchBrowser": true,
+            "launchUrl": "swagger",
+            "environmentVariables": {
+                "SENTRY_RELEASE": "",
+                "SENTRY_MINIMUM_EVENT_LEVEL": "",
+                "SERILOG_LOGGING_LEVEL": "Information",
+                "SENTRY_ENVIRONMENT": "",
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "SENTRY_DSN": "",
+                "USE_IN_MEMORY_DATABASE": "false",
+                "IN_MEMORY_DATABASE_NAME": "AppDemoDb",
+                "USE_POSTGRESQL_DB": "true",
+                "USE_SQLSERVER_DB": "false",
+                "ENABLE_ODATA": "true",
+                "PGHOST": "localhost",
+                "PGPORT": "5432",
+                "PGPASSWORD": "postgres",
+                "PGUSER": "postgres",
+                "PGDATABASE": "test-db-postgres",
+                "PGVERSION": "11.8",
+                "SQLHOST": "IN-LT-42\\SQLEXPRESS",
+                "SQLPORT": "1433",
+                "SQLPASSWORD": "sa12345as",
+                "SQLUSER": "sa",
+                "SQLDATABASE": "test-db-sqlserver"
+            },
+            "dotnetRunMessages": "true",
+            "applicationUrl": "https://localhost:5001;http://localhost:5000"
+        },
+        "Docker": {
+            "commandName": "Docker",
+            "launchBrowser": true,
+            "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
+            "publishAllPorts": true,
+            "useSSL": true
+        }
+    }
+}

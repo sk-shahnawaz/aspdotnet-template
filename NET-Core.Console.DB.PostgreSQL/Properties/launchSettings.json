@@ -1,0 +1,15 @@
+{
+    "profiles": {
+        "Localhost": {
+            "commandName": "Project",
+            "environmentVariables": {
+                "PGHOST": "localhost",  
+                "PGPORT": "5432",       // For Dockerized PostgreSQL container, put the system port number which is bound to dockerized PostgreSQL container's default port (5432)
+                "PGPASSWORD": "postgres",
+                "PGUSER": "postgres",
+                "PGDATABASE": "test-db-postgres",
+                "PGVERSION": "11.8"     // For Dockerized PostgreSQL container, check & change the version accordingly
+            }
+        }
+    }
+}

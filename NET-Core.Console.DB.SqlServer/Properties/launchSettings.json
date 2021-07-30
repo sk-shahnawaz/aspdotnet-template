@@ -1,0 +1,14 @@
+{
+    "profiles": {
+        "Localhost": {
+            "commandName": "Project",
+            "environmentVariables": {
+                "SQLHOST": "IN-LT-42\\SQLEXPRESS",
+                "SQLPORT": "1433",
+                "SQLPASSWORD": "sa12345as",
+                "SQLUSER": "sa",
+                "SQLDATABASE": "test-db-sqlserver"
+            }
+        }
+    }
+}
