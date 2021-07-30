@@ -362,4 +362,4 @@ FodyWeavers.xsd
 
 # BeatPulse healthcheck temp database
 healthchecksdb
-# */Properties/launchSettings.json
+*/Properties/launchSettings.json
