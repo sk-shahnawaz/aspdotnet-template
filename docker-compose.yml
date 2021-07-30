@@ -1,36 +1,50 @@
 ﻿version: '3.7'
 services:
- application:
-  container_name: application 
+ aspdotnet_template:
+  container_name: web-api
   build:
    context: .
-   network: host
+   dockerfile: Dockerfile
+  networks:
+    - appnetwork
   ports:
    - "8585:80"
+   - "8586:443"
   environment:
    ENV: dev
    ASPNETCORE_ENVIRONMENT: Production
-   PGHOST: localhost
+   USE_IN_MEMORY_DATABASE: "false"
+   IN_MEMORY_DATABASE_NAME: AppDemoDb
+   USE_POSTGRESQL_DB: "true"
+   USE_SQLSERVER_DB: "false"
+   ENABLE_ODATA: "true"
+   PGHOST: postgres-db
    PGPORT: 5432
    PGPASSWORD: postgres
    PGUSER: postgres
    PGDATABASE: test-db-postgres
-   PGVERSION: 11.8
+   PGVERSION: 13.3
    SERILOG_LOGGING_LEVEL: information
    SENTRY_ENVIRONMENT: local-docker
-  
- db:
-    container_name: postgres-container
-    image: postgres
+  depends_on:
+   - 'postgres'  
+ postgres:
+    container_name: postgres-db
+    image: 'postgres:latest'
     restart: always
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: test-db-postgres
     ports:
-      - "5433:5432"
+      - "8587:5432"
+    networks:
+      - appnetwork
     volumes:
-      - appdata:/var/lib/postgres
+      - appdata:/var/lib/aspdotnet_template/postgres
       
 volumes:
   appdata:
+networks:
+  appnetwork:
+   driver: bridge

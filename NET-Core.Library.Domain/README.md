@@ -4,7 +4,7 @@
 
 This is project containing the domain contexts, repositories, unit of work implementations. 
 
-## Project structure
+## Project Structure
 
 | Directory Name | Usage |
 |----------------|-------|

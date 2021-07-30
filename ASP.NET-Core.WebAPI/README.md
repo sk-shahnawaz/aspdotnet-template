@@ -4,7 +4,7 @@
 
 This is main web API project containing all the API resources.
 
-## Project structure
+## Project Structure
 
 | Directory Name | Usage |
 |----------------|-------|
@@ -23,14 +23,6 @@ This is main web API project containing all the API resources.
 
 ## Application Configuration
 
-### AppSettings.json
-
-- **USE_IN_MEMORY_DATABASE** [true/false], when set to true, application uses in-memory database, when set to false, tries to configure and use PostgreSQL / SQL Server database as per configuration
-- **IN_MEMORY_DATABASE_NAME**, Name of the in-memory database, considered only when '*USE_IN_MEMORY_DATABASE*' is set to *true*
-- **USE_POSTGRESQL_DB** [true/false], when set to true, application configures and uses PostgreSQL as persisitent medium, note that this works only when '*USE_IN_MEMORY_DATABASE*' is set to *false*
-- **USE_SQLSERVER_DB** [true/false], when set to true, application configures and uses Microsoft SQL Server as persisitent medium, note that this works only when '*USE_IN_MEMORY_DATABASE*' is set to *false*, furthermore, when both PostgrSQL & SQL Server are enabled, PostgreSQL will get higher preference
-- **ENABLE_ODATA** [true/false], when set to true, application adds OData functionality for selection, sorting on top of Web API, when set to false, disables this feature
-
 ### Environment Variables
 
 | Variable Name | Help Text |
@@ -41,6 +33,11 @@ This is main web API project containing all the API resources.
 | SENTRY_ENVIRONMENT | Sentry environment |
 | ASPNETCORE_ENVIRONMENT | ASP.NET Core environment |
 | SENTRY_DSN | Sentry DSN |
+| USE_IN_MEMORY_DATABASE | [true/false], when set to true, application uses in-memory database, when set to false, tries to configure and use PostgreSQL / SQL Server database as per configuration |
+| IN_MEMORY_DATABASE_NAME | Name of the in-memory database, considered only when '*USE_IN_MEMORY_DATABASE*' is set to *true* |
+| USE_POSTGRESQL_DB | [true/false], when set to true, application configures and uses PostgreSQL as persisitent medium, note that this works only when '*USE_IN_MEMORY_DATABASE*' is set to *false* |
+| USE_SQLSERVER_DB | [true/false], when set to true, application configures and uses Microsoft SQL Server as persisitent medium, note that this works only when '*USE_IN_MEMORY_DATABASE*' is set to *false*, furthermore, when both PostgrSQL & SQL Server are enabled, PostgreSQL will get higher preference |
+| ENABLE_ODATA | [true/false], when set to true, application adds OData functionality for selection, sorting on top of Web API, when set to false, disables this feature |
 | PGHOST | PostgreSQL host name |
 | PGPORT | PostgreSQL port number |
 | PGPASSWORD | PostgreSQL password |
@@ -93,7 +90,7 @@ cd aspdotnet-template
 
 #### Docker Compose
 ```
-docker-compose --project-name aspnet-core-webapi-template-cluster --verbose --file docker-compose.yml up --build
+docker-compose up --force-recreate
 ```
 
 ## Learning
