@@ -90,7 +90,7 @@ cd aspdotnet-template
 
 #### Docker Compose
 ```
-docker-compose up --force-recreate
+docker-compose --verbose --file docker-compose.yml up --build
 ```
 
 ## Learning
