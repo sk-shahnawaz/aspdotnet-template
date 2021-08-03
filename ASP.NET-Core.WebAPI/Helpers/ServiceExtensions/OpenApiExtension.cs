@@ -57,6 +57,7 @@ namespace ASP.NET.Core.WebAPI.Helpers.ServiceExtensions
         /// <param name="apiVersionDescription">Instance of 'ApiVersionDescription' representing of an API version</param>
         internal static void ConstructSwaggerEndpoint(this SwaggerUIOptions swaggerUiOptions, ApiVersionDescription apiVersionDescription)
         {
+            swaggerUiOptions.RoutePrefix = "api-docs";
             swaggerUiOptions.SwaggerEndpoint($"/swagger/{apiVersionDescription.GroupName}/swagger.json", apiVersionDescription.GroupName.ToUpperInvariant());
             swaggerUiOptions.DefaultModelExpandDepth(2);
             swaggerUiOptions.DefaultModelRendering(ModelRendering.Example);

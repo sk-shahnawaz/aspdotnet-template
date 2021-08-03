@@ -27,6 +27,28 @@ services:
    SERILOG_LOGGING_LEVEL: information
    SENTRY_ENVIRONMENT: local-docker
   depends_on:
+   - 'postgres' 
+ db_migration:
+  container_name: db-migration
+  build:
+   context: /.
+   dockerfile: ./NET-Core.Console.DB.PostgreSQL/Dockerfile
+  networks:
+    - appnetwork
+  environment:
+   ENV: dev
+   ASPNETCORE_ENVIRONMENT: Production
+   USE_IN_MEMORY_DATABASE: "false"
+   IN_MEMORY_DATABASE_NAME: AppDemoDb
+   PGHOST: postgres-db
+   PGPORT: 5432
+   PGPASSWORD: postgres
+   PGUSER: postgres
+   PGDATABASE: test-db-postgres
+   PGVERSION: 13.3
+   SERILOG_LOGGING_LEVEL: information
+   SENTRY_ENVIRONMENT: local-docker
+  depends_on:
    - 'postgres'  
  postgres:
     container_name: postgres-db
