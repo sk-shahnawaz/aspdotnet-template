@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is project for running PostgresSQL DB migrations as console application.
+This is project for running PostgreSQL DB migrations as console application.
 
 ## Project Structure
 | Directory Name | Usage |

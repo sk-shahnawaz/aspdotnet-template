@@ -58,7 +58,7 @@ Please read [CONTRIBUTING.md](/CONTRIBUTING.md) before starting to contribute in
 | Scripts | Directory | Contains all scripts related to this repository |
 | Scripts\repository-files-renamer.ps1 | File | This Powershell script file can be used to automatically renaming directories/files, replacing file contents to set up a new solution from this template repository |
 | CONTRIBUTING.md | File | GitHub repository contributions mark-up file |
-| docker-compose.PostgreSQL.yml | File | Docker compose file to build the application docker image along with PostgreSQL image together with networking / volumes etc. |
+| docker-compose.yml | File | Docker compose file to build the application docker image along with PostgreSQL image, PostgreSQL specific migrations and with networking / volumes etc. |
 | Dockerfile | File | Dockerization script file of the application |
 | LICENSE.md | File | GitHub repository license mark-up file |
 | README.md | File | GitHub repository readme mark-up file |
