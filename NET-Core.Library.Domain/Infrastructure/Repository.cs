@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +14,7 @@ namespace NET.Core.Library.Domain.Infrastructure
     /// </summary>
     /// <typeparam name="T">Generic type argument, representing abstraction of IEntity</typeparam>
     public sealed class Repository<T> : IRepository<T>
-        where T : class, IEntity
+        where T : class
     {
         private const string _argumentMissingErrorMessage = "Argument is null.";
         private readonly AppDbContext _appDbContext;
@@ -23,9 +24,14 @@ namespace NET.Core.Library.Domain.Infrastructure
             _appDbContext = unitOfWork.Context as AppDbContext;
         }
 
-        public IQueryable<T> AsQueryable()
+        public IQueryable<T> AsQueryable(bool trackEntity = true)
         {
-            return _appDbContext.Set<T>().AsQueryable();
+            var query = _appDbContext.Set<T>().AsQueryable();
+            if (!trackEntity)
+            {
+                query = query.AsNoTracking();
+            }
+            return query;
         }
 
         public void Add(T item)
@@ -52,16 +58,68 @@ namespace NET.Core.Library.Domain.Infrastructure
             _appDbContext.Set<T>().Remove(item);
         }
 
-        public T Get(long id)
+        public T Get(Expression<Func<T, bool>> expression, bool trackEntity = true)
         {
             IQueryable<T> query = _appDbContext.Set<T>();
-            return query.SingleOrDefault(o => o.Id == id);
+            if (!trackEntity)
+            {
+                query = query.AsNoTracking();
+            }
+            if (expression != null)
+            {
+                query = query.Where(expression);
+            }
+            return query.FirstOrDefault();
         }
 
-        public async Task<T> GetAsync(long id, CancellationToken cancellationToken = default)
+        public T Get(Expression<Func<T, bool>> expression, bool trackEntity = true, params Expression<Func<T, object>>[] includes)
         {
             IQueryable<T> query = _appDbContext.Set<T>();
-            return await query.SingleOrDefaultAsync(o => o.Id == id, cancellationToken);
+            if (!trackEntity)
+            {
+                query = query.AsNoTracking();
+            }
+            foreach (var include in includes)
+            {
+                query = query.Include(include);
+            }
+            if (expression != null)
+            {
+                query = query.Where(expression);
+            }
+            return query.FirstOrDefault();
+        }
+
+        public async Task<T> GetAsync(Expression<Func<T, bool>> expression, bool trackEntity = true, CancellationToken cancellationToken = default)
+        {
+            IQueryable<T> query = _appDbContext.Set<T>();
+            if (!trackEntity)
+            {
+                query = query.AsNoTracking();
+            }
+            if (expression != null)
+            {
+                query = query.Where(expression);
+            }
+            return await query.FirstOrDefaultAsync(cancellationToken);
+        }
+
+        public async Task<T> GetAsync(Expression<Func<T, bool>> expression, bool trackEntity = true, CancellationToken cancellationToken = default, params Expression<Func<T, object>>[] includes)
+        {
+            IQueryable<T> query = _appDbContext.Set<T>();
+            if (!trackEntity)
+            {
+                query = query.AsNoTracking();
+            }
+            foreach (var include in includes)
+            {
+                query = query.Include(include);
+            }
+            if (expression != null)
+            {
+                query = query.Where(expression);
+            }
+            return await query.FirstOrDefaultAsync(cancellationToken);
         }
 
         public void Update(T item)

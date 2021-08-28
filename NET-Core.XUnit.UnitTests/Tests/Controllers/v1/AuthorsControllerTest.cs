@@ -28,7 +28,7 @@ namespace NET.Core.XUnit.UnitTests.Tests.Controllers.v1
             Mock<IQueryable<Author>> authorQueryableMock = authorsMock.AsQueryable().BuildMock();
 
             Mock<IRepository<Author>> authorRepositoryMock = new();
-            authorRepositoryMock.Setup(repository => repository.AsQueryable()).Returns(authorQueryableMock.Object).Verifiable();
+            authorRepositoryMock.Setup(repository => repository.AsQueryable(false)).Returns(authorQueryableMock.Object).Verifiable();
 
             Mock<IMapper> mapperMock = new();
             mapperMock.Setup(mapper => mapper.Map<Author, AuthorDTO>(It.IsAny<Author>())).Returns(new AuthorDTO() { Id = id, FirstName = "Test" });
@@ -60,7 +60,7 @@ namespace NET.Core.XUnit.UnitTests.Tests.Controllers.v1
             Mock<IQueryable<Author>> authorQueryableMock = authorsMock.AsQueryable().BuildMock();
 
             Mock<IRepository<Author>> authorRepositoryMock = new();
-            authorRepositoryMock.Setup(repository => repository.AsQueryable()).Returns(authorQueryableMock.Object).Verifiable();
+            authorRepositoryMock.Setup(repository => repository.AsQueryable(false)).Returns(authorQueryableMock.Object).Verifiable();
 
             Mock<IMapper> mapperMock = new();
             mapperMock.Setup(mapper => mapper.Map<Author, AuthorDTO>(It.IsAny<Author>())).Returns(new AuthorDTO() { Id = id, FirstName = "Test" });
@@ -88,7 +88,7 @@ namespace NET.Core.XUnit.UnitTests.Tests.Controllers.v1
             IQueryable<Author> expectingNull = null;
 
             Mock<IRepository<Author>> authorRepositoryMock = new();
-            authorRepositoryMock.Setup(repository => repository.AsQueryable()).Returns(expectingNull);
+            authorRepositoryMock.Setup(repository => repository.AsQueryable(false)).Returns(expectingNull);
 
             Mock<IMapper> mapperMock = new();
             Mock<ILogger<AuthorsController>> loggerMock = new();
@@ -101,7 +101,7 @@ namespace NET.Core.XUnit.UnitTests.Tests.Controllers.v1
             // Assert
             if (actionResult != null && (actionResult is ObjectResult) && ((actionResult as ObjectResult).Value is ProblemDetails))
             {
-                Assert.True(((actionResult as ObjectResult).Value as ProblemDetails).Status == StatusCodes.Status500InternalServerError);
+                Assert.True(((actionResult as ObjectResult).Value as ProblemDetails).Status == StatusCodes.Status404NotFound);
             }
         }
     }

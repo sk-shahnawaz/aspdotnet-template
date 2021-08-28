@@ -4,7 +4,7 @@ using NET.Core.Library.Domain.Infrastructure.Contracts;
 
 namespace NET.Core.Library.Domain.DBModels
 {
-    public class Book : IEntity
+    public class Book : IEntity<long>
     {
         public long Id { get; set; }
         public string Isbn { get; set; }

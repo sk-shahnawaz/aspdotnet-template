@@ -66,6 +66,7 @@ namespace ASP.NET.Core.WebAPI
             services.AddCors(environmentConfiguration);
             services.AddRoutingConfigurations();
             services.AddDependencies(environmentConfiguration, applicationConfiguration);
+            services.AddModelAutoMappings();
             services.AddVersioning();               // Must come before AddControllers call.
             services.AddWebApi(applicationConfiguration);
             services.AddOpenApi();
@@ -102,13 +103,13 @@ namespace ASP.NET.Core.WebAPI
             app.UseMiddleware<RequestResponseLogger>();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
-			{
-				if (applicationConfiguration?.EnableOData ?? false)
-				{
-					endpoints.EnableDependencyInjection();
-					endpoints.Select().Expand().Filter();
-				}
-				endpoints.MapControllers();
+            {
+                if (applicationConfiguration?.EnableOData ?? false)
+                {
+                    endpoints.EnableDependencyInjection();
+                    endpoints.Select().Expand().Filter();
+                }
+                endpoints.MapControllers();
                 endpoints.MapHealthChecks("/health");
             });
             app.UseSwagger(provider);

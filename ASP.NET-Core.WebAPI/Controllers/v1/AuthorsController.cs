@@ -20,7 +20,7 @@ using ASP.NET.Core.WebAPI.Models.DTOs.Contracts;
 
 namespace ASP.NET.Core.WebAPI.Controllers.v1
 {
-	[ApiController]
+    [ApiController]
     [ApiVersion("1.0")]
     [Produces(AppResources.MimeTypeApplicationJson)]
     [Route("api/v{version:apiVersion}/[controller]")]
@@ -67,7 +67,7 @@ namespace ASP.NET.Core.WebAPI.Controllers.v1
         {
             try
             {
-                Author author = await _authorsRepository.AsQueryable().Include(author => author.Books).FirstOrDefaultAsync(author => author.Id == id);
+                Author author = await _authorsRepository.GetAsync(author => author.Id == id, trackEntity: false, cancellationToken: default, includes: author => author.Books);
                 if (author != null)
                 {
                     AuthorDTO authorDTO = _mapper.Map<Author, AuthorDTO>(author);
@@ -106,7 +106,7 @@ namespace ASP.NET.Core.WebAPI.Controllers.v1
         {
             try
             {
-                IQueryable<Author> query = _authorsRepository.AsQueryable().Include(a => a.Books);
+                IQueryable<Author> query = _authorsRepository.AsQueryable(trackEntity: false).Include(author => author.Books);
                 List<Author> authors = await query.Skip((pagination.PageNumber - 1) * pagination.PageSize).Take(pagination.PageSize).ToListAsync();
                 if (authors?.Count > 0)
                 {
@@ -151,7 +151,7 @@ namespace ASP.NET.Core.WebAPI.Controllers.v1
         {
             try
             {
-                if (!await _authorsRepository.AsQueryable().AnyAsync(storedAuthor => string.Equals(storedAuthor.Email, authorDTO.Email)))
+                if (!await _authorsRepository.AsQueryable(trackEntity: false).AnyAsync(storedAuthor => string.Equals(storedAuthor.Email, authorDTO.Email)))
                 {
                     Author author = _mapper.Map<AuthorDTO, Author>(authorDTO);
                     if (author != null)

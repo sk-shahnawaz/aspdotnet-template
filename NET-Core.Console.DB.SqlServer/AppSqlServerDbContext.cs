@@ -20,18 +20,18 @@ namespace NET.Core.Console.DB.SqlServer
 
         public AppSqlServerDbContext()
         {
-			// This constructor is used when this project is run as standalone for performing DB Migrations.
-			_connectionStringBuilder = new()    // C# 9.0
-			{
-				DataSource = string.Concat(ReadEnvironmentVariable("SQLHOST", string.Empty), "," , ReadEnvironmentVariable("SQLPORT", "1433")),
-				InitialCatalog = ReadEnvironmentVariable("SQLDATABASE", string.Empty),
+            // This constructor is used when this project is run as standalone for performing DB Migrations.
+            _connectionStringBuilder = new()    // C# 9.0
+            {
+                DataSource = string.Concat(ReadEnvironmentVariable("SQLHOST", string.Empty), ",", ReadEnvironmentVariable("SQLPORT", "1433")),
+                InitialCatalog = ReadEnvironmentVariable("SQLDATABASE", string.Empty),
                 UserID = ReadEnvironmentVariable("SQLUSER", string.Empty),
                 Password = ReadEnvironmentVariable("SQLPASSWORD", string.Empty),
-				PersistSecurityInfo = false,
-				MultipleActiveResultSets = true,
-				TrustServerCertificate = true,
-			};
-		}
+                PersistSecurityInfo = false,
+                MultipleActiveResultSets = true,
+                TrustServerCertificate = true,
+            };
+        }
 
         public AppSqlServerDbContext(string sqlHost, string sqlPort, string sqlDatabase, string sqlUser, string sqlPassword)
         {

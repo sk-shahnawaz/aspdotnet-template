@@ -16,6 +16,6 @@ namespace ASP.NET.Core.WebAPI.Helpers.Services
             ActionContext actionContext = serviceProvider.GetRequiredService<IActionContextAccessor>().ActionContext;
             IUrlHelperFactory factory = serviceProvider.GetRequiredService<IUrlHelperFactory>();
             return factory.GetUrlHelper(actionContext);
-        }		
-	}
+        }
+    }
 }

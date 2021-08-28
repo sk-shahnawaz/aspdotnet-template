@@ -65,7 +65,7 @@ namespace ASP.NET.Core.WebAPI.Controllers.v2
         {
             try
             {
-                Author author = await _authorsRepository.AsQueryable().Include(author => author.Books).FirstOrDefaultAsync(author => string.Equals(author.Email, email));
+                Author author = await _authorsRepository.AsQueryable(trackEntity: false).Include(author => author.Books).FirstOrDefaultAsync(author => string.Equals(author.Email, email));
                 if (author != null)
                 {
                     AuthorDTO authorDTO = _mapper.Map<Author, AuthorDTO>(author);
