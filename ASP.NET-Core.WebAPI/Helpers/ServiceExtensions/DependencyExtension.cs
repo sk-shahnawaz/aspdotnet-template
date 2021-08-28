@@ -14,7 +14,7 @@ using ASP.NET.Core.WebAPI.Helpers.Services;
 
 namespace ASP.NET.Core.WebAPI.Helpers.ServiceExtensions
 {
-	internal static class DependencyExtension
+    internal static class DependencyExtension
     {
         /// <summary>
         /// Registers depedencies which will be injected by runtime during application's life-time. Registers AutoMapper mapping profiles.
@@ -44,9 +44,9 @@ namespace ASP.NET.Core.WebAPI.Helpers.ServiceExtensions
             {
                 if (applicationConfiguration?.UsePostgreSql ?? false)
                 {
-					#region --- PostgreSQL ---
+                    #region --- PostgreSQL ---
 
-					if (AppUtilities.InspectPostgreSQLDbParams(environmentConfiguration))
+                    if (AppUtilities.InspectPostgreSQLDbParams(environmentConfiguration))
                     {
                         // Register database context class (The class must inherit AppDbContext) 
                         serviceCollection.AddScoped<IAppDbContext>(provider => new AppPostgreSQLDbContext(environmentConfiguration?.PGHOST, environmentConfiguration?.PGPORT, environmentConfiguration?.PGDATABASE, environmentConfiguration?.PGUSER, environmentConfiguration?.PGPASSWORD, environmentConfiguration?.PGVERSION));
@@ -64,9 +64,9 @@ namespace ASP.NET.Core.WebAPI.Helpers.ServiceExtensions
                 }
                 else if (applicationConfiguration?.UseSqlServer ?? false)
                 {
-					#region --- Microsoft SQL Server ---
+                    #region --- Microsoft SQL Server ---
 
-					if (AppUtilities.InspectSqlServerDbParams(environmentConfiguration))
+                    if (AppUtilities.InspectSqlServerDbParams(environmentConfiguration))
                     {
                         // Register database context class (The class must inherit AppDbContext) 
                         serviceCollection.AddScoped<IAppDbContext>(provider => new AppSqlServerDbContext(environmentConfiguration?.SQLHOST, environmentConfiguration?.SQLPORT, environmentConfiguration?.SQLDATABASE, environmentConfiguration?.SQLUSER, environmentConfiguration?.SQLPASSWORD));
@@ -79,7 +79,7 @@ namespace ASP.NET.Core.WebAPI.Helpers.ServiceExtensions
                     {
                         throw new System.ArgumentException(AppResources.SqlServerParamsInvalid);
                     }
-                    
+
                     #endregion --- Microsoft SQL Server ---
                 }
                 else
@@ -96,13 +96,6 @@ namespace ASP.NET.Core.WebAPI.Helpers.ServiceExtensions
 
             /* Custom service registration */
             serviceCollection.AddScoped<IUrlHelper>(serviceProvider => UrlHelperService.GetUrlHelper(serviceProvider));
-
-            // Automapper profile : TODO: Move to other class
-            serviceCollection.AddAutoMapper(configAction =>
-            {
-                configAction.CreateMap(typeof(Author), typeof(AuthorDTO)).ReverseMap();
-                configAction.CreateMap(typeof(Book), typeof(BookDTO)).ReverseMap();
-            });
         }
     }
 }

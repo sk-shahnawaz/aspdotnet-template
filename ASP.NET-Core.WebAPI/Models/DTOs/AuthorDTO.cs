@@ -22,6 +22,10 @@ namespace ASP.NET.Core.WebAPI.Models.DTOs
         [SwaggerSchema(Description = "Last Name of the Author")]
         public string LastName { get; set; }
 
+        [Display(Name = "Full Name")]
+        [SwaggerSchema(Description = "Full Name of the Author", ReadOnly = true, Nullable = false)]
+        public string FullName { get; set; }
+
         [SwaggerSchema(Description = "Address of the Author")]
         public string Address { get; set; }
 

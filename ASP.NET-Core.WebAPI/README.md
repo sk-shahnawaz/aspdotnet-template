@@ -17,7 +17,7 @@ This is main web API project containing all the API resources.
 | Infrastructure\API\Validators | Contains all the custom validator attributes used during model binding |
 | Infrastructure\EFCore | Constains Entity Framework Core specific files (Seeding data) |
 | Models\DTOs\Contracts | Contains contract definition to be used by all DTOs |
-| Models|DTOs | Contains all the DTOs of the application |
+| Models\DTOs | Contains all the DTOs of the application |
 | Models\Utilites | Contain other classes used in the project |
 | Utilities | Contain utility classes and methods used in the project |
 
