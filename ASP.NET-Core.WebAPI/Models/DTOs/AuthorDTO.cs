@@ -24,7 +24,7 @@ namespace ASP.NET.Core.WebAPI.Models.DTOs
 
         [Display(Name = "Full Name")]
         [SwaggerSchema(Description = "Full Name of the Author", ReadOnly = true, Nullable = false)]
-        public string FullName { get; set; }
+        public string FullName { get => !string.IsNullOrEmpty(MiddleName) ? $"{FirstName} {MiddleName} {LastName}" : $"{FirstName} {LastName}"; }
 
         [SwaggerSchema(Description = "Address of the Author")]
         public string Address { get; set; }
@@ -38,7 +38,7 @@ namespace ASP.NET.Core.WebAPI.Models.DTOs
         [Required]
         [EmailAddress]
         [SwaggerSchema(Description = "Email Address of the Author")]
-        public string Email { get; set; }
+        public string EmailAddress { get; set; }
 
         [SwaggerSchema(Description = "Books linked to the Author")]
         public List<BookDTO> Books { get; set; }
