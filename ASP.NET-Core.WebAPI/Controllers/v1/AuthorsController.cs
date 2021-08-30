@@ -152,6 +152,7 @@ namespace ASP.NET.Core.WebAPI.Controllers.v1
             try
             {
                 if (!await _authorsRepository.AsQueryable(trackEntity: false).AnyAsync(storedAuthor => string.Equals(storedAuthor.Email, authorDTO.EmailAddress)))
+
                 {
                     Author author = _mapper.Map<AuthorDTO, Author>(authorDTO);
                     if (author != null)
