@@ -16,9 +16,9 @@ namespace ASP.NET.Core.WebAPI.Helpers.ServiceExtensions
             serviceCollection.AddAutoMapper(configAction =>
             {
                 configAction.CreateMap<Author, AuthorDTO>()
-                    .ForMember(destination => destination.FullName,
-                               option => option.MapFrom(source => !string.IsNullOrEmpty(source.MiddleName) ?
-                                    $"{source.FirstName} {source.MiddleName} {source.LastName}" : $"{source.FirstName} {source.LastName}")).ReverseMap();
+                // Example: Member of DTO type has different name than that of corresponding model type
+                    .ForMember(destination => destination.EmailAddress,
+                               option => option.MapFrom(source => source.Email)).ReverseMap();
 
                 configAction.CreateMap(typeof(Book), typeof(BookDTO)).ReverseMap();
             });

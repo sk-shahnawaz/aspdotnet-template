@@ -11,6 +11,6 @@ jobs:
     steps:
       - uses: actions/labeler@main
         with:
-          repo-token: '${{ secrets.GITHUB_TOKEN }}'
+          repo-token: '${{ secrets.REPO_TOKEN }}'
           configuration-path: .github/labeler.config.yml
           sync-labels: true

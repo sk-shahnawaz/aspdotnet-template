@@ -151,7 +151,7 @@ namespace ASP.NET.Core.WebAPI.Controllers.v1
         {
             try
             {
-                if (!await _authorsRepository.AsQueryable(trackEntity: false).AnyAsync(storedAuthor => string.Equals(storedAuthor.Email, authorDTO.Email)))
+                if (!await _authorsRepository.AsQueryable(trackEntity: false).AnyAsync(storedAuthor => string.Equals(storedAuthor.Email, authorDTO.EmailAddress)))
                 {
                     Author author = _mapper.Map<AuthorDTO, Author>(authorDTO);
                     if (author != null)
@@ -176,7 +176,7 @@ namespace ASP.NET.Core.WebAPI.Controllers.v1
                 }
                 else
                 {
-                    return Problem(string.Format(AppResources.ForbidRequestDueToUniqueConstraintFailure, nameof(authorDTO.Email), authorDTO.Email), statusCode: StatusCodes.Status422UnprocessableEntity);
+                    return Problem(string.Format(AppResources.ForbidRequestDueToUniqueConstraintFailure, nameof(authorDTO.EmailAddress), authorDTO.EmailAddress), statusCode: StatusCodes.Status422UnprocessableEntity);
                 }
             }
             catch (Exception ex)
