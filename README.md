@@ -68,34 +68,39 @@ Please read [CONTRIBUTING.md](/CONTRIBUTING.md) before starting to contribute in
 | Project Name | Package Name | Version | License | Usage Area |
 |--------------|--------------|---------|---------|------------|	
 | ASP.NET-Core.WebAPI |	AutoMapper.Extensions.Microsoft.DependencyInjection	| 8.1.1 | MIT | Dependency Injection for Automapping |
-| ASP.NET-Core.WebAPI |	Microsoft.AspNetCore.Mvc.NewtonsoftJson | 5.0.6 | Apache-2.0 | Serialization & Deserialization |
+| ASP.NET-Core.WebAPI |	Microsoft.AspNetCore.Mvc.NewtonsoftJson | 5.0.10 | Apache-2.0 | Serialization & Deserialization |
 | ASP.NET-Core.WebAPI | Microsoft.AspNetCore.Mvc.Versioning | 5.0.0 | MIT | API versioning |
 | ASP.NET-Core.WebAPI | Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer | 5.0.0	| MIT | API versioning, API exploring |
-| ASP.NET-Core.WebAPI | Microsoft.EntityFrameworkCore | 5.0.8 | Apache-2.0 | ORM framework |
-| ASP.NET-Core.WebAPI | Microsoft.EntityFrameworkCore.Design | 5.0.8 | Apache-2.0 | ORM framework, Schema design |
-| ASP.NET-Core.WebAPI | Microsoft.EntityFrameworkCore.InMemory | 5.0.6 | Apache-2.0 | ORM framework, In memory database |
+| ASP.NET-Core.WebAPI | Microsoft.EntityFrameworkCore | 5.0.10 | Apache-2.0 | ORM framework |
+| ASP.NET-Core.WebAPI | Microsoft.EntityFrameworkCore.Design | 5.0.10 | Apache-2.0 | ORM framework, Schema design |
+| ASP.NET-Core.WebAPI | Microsoft.EntityFrameworkCore.InMemory | 5.0.10 | Apache-2.0 | ORM framework, In memory database |
 | ASP.NET-Core.WebAPI | Microsoft.VisualStudio.Azure.Containers.Tools.Targets | 1.10.13 | Microsoft Software License |
-| ASP.NET-Core.WebAPI | Sentry.Extensions.Logging | 3.4.0 | MIT | Application monitoring |
-| ASP.NET-Core.WebAPI | Serilog.Extensions.Logging | 3.0.1 | Apache-2.0 | Logging |
-| ASP.NET-Core.WebAPI | Serilog.Settings.Configuration | 3.1.0 | Apache-2.0 | Logging configuration |
-| ASP.NET-Core.WebAPI | Serilog.Sinks.Console | 3.1.1 | Apache-2.0 | Console logging |
-| ASP.NET-Core.WebAPI | Swashbuckle.AspNetCore | 6.1.4 | MIT | API documentation |
-| ASP.NET-Core.WebAPI | Swashbuckle.AspNetCore.Annotations | 6.1.4 | MIT | API documentation annotations |
-| ASP.NET-Core.WebAPI | Swashbuckle.AspNetCore.Newtonsoft | 6.1.4 | MIT | Serialization & Deserialization for API documentation |
+| ASP.NET-Core.WebAPI | Sentry.Extensions.Logging | 3.9.4 | MIT | Application monitoring |
+| ASP.NET-Core.WebAPI | Serilog.Extensions.Logging | 3.2.0 | Apache-2.0 | Logging |
+| ASP.NET-Core.WebAPI | Serilog.Settings.Configuration | 3.2.0 | Apache-2.0 | Logging configuration |
+| ASP.NET-Core.WebAPI | Serilog.Sinks.Console | 4.0.0 | Apache-2.0 | Console logging |
+| ASP.NET-Core.WebAPI | Swashbuckle.AspNetCore | 6.2.2 | MIT | API documentation |
+| ASP.NET-Core.WebAPI | Swashbuckle.AspNetCore.Annotations | 6.2.2 | MIT | API documentation annotations |
+| ASP.NET-Core.WebAPI | Swashbuckle.AspNetCore.Newtonsoft | 6.2.2 | MIT | Serialization & Deserialization for API documentation |
 | ASP.NET-Core.WebAPI | Microsoft.AspNetCore.OData | 7.5.8 | MIT | OData functionality on top of Web API |
-| NET.Core.Library.Domain | Microsoft.AspNetCore.Http.Abstractions | 2.2.0 | Apache-2.0 |
-| NET.Core.Library.Domain | Microsoft.EntityFrameworkCore | 5.0.6 | Apache-2.0 | ORM framework |
-| NET.Core.Library.Domain | Microsoft.EntityFrameworkCore.Design | 5.0.6 | Apache-2.0| ORM framework, Schema design |
-| NET.Core.Console.DB.PostgreSQL | Microsoft.EntityFrameworkCore.Design | 5.0.6 | Apache-2.0| ORM dramework, Schema design |
+| NET.Core.Library.Domain | Microsoft.AspNetCore.Http.Abstractions | 2.2.0 | Microsoft Software License |
+| NET.Core.Library.Domain | Microsoft.EntityFrameworkCore | 5.0.10 | Apache-2.0 | ORM framework
+| NET.Core.Console.DB.Domain | Microsoft.EntityFrameworkCore.Tools | 5.0.10 | EF Core migration |
+| NET.Core.Library.Domain | Microsoft.EntityFrameworkCore.Design | 5.0.10 | Apache-2.0| ORM framework, Schema design |
+| NET.Core.Console.DB.PostgreSQL | Microsoft.EntityFrameworkCore.Design | 5.0.10 | Apache-2.0| ORM dramework, Schema design |
 | NET.Core.Console.DB.PostgreSQL | Microsoft.Extensions.Logging.Console | 5.0.0 | MIT | Console logging |
-| NET.Core.Console.DB.PostgreSQL | Npgsql.EntityFrameworkCore.PostgreSQL | 5.0.6 | PostgreSQL | ORM framework for PostgreSQL |
-| NET.Core.Console.DB.SqlServer | Microsoft.Data.SqlClient | 3.0.0 | Apache-2.0 | ORM framework for SQL Server |
-| NET.Core.Console.DB.SqlServer | Microsoft.EntityFrameworkCore.Design | 5.0.8 | MIT | ORM dramework, Schema design |
-| NET.Core.Console.DB.SqlServer | Npgsql.EntityFrameworkCore.SqlServer | 5.0.8 | PostgreSQL | ORM framework for SQL Server |
+| NET.Core.Console.DB.PostgreSQL | Npgsql.EntityFrameworkCore.PostgreSQL | 5.0.10 | PostgreSQL | ORM framework for PostgreSQL |
+| NET.Core.Console.DB.PostgreSQL | Microsoft.EntityFrameworkCore | 5.0.10 | Apache-2.0 | ORM framework |
+| NET.Core.Console.DB.PostgreSQL | Microsoft.EntityFrameworkCore.Tools | 5.0.6 | Apache-2.0 | EF Core migration |
+| NET.Core.Console.DB.SqlServer | Microsoft.Data.SqlClient | 3.0.1 | Apache-2.0 | Client for SQL Server |
+| NET.Core.Console.DB.SqlServer | Microsoft.EntityFrameworkCore.Design | 5.0.10 | MIT | ORM dramework, Schema design |
+| NET.Core.Console.DB.SqlServer | Npgsql.EntityFrameworkCore.SqlServer | 5.0.10 | Apache-2.0 | ORM framework for SQL Server |
 | NET.Core.Console.DB.SqlServer | Microsoft.Extensions.Logging.Console | 5.0.0 | MIT | Console logging |
+| NET.Core.Console.DB.SqlServer | Microsoft.EntityFrameworkCore | 5.0.10 | Apache-2.0 | ORM framework |
+| NET.Core.Console.DB.SqlServer | Microsoft.EntityFrameworkCore.Tools | 5.0.10 | EF Core migration |
 | NET.Core.XUnit.UnitTests | AutoMapper | 10.1.1 | MIT | Automapping |
-| NET.Core.XUnit.UnitTests | coverlet.collector | 3.0.3 | MIT | Mocker for unit testing
-| NET.Core.XUnit.UnitTests | Microsoft.NET.Test.Sdk | 16.10.0 | Microsoft Software License	| SDK for Unit testing |		
+| NET.Core.XUnit.UnitTests | coverlet.collector | 3.1.0 | MIT | Mocker for unit testing
+| NET.Core.XUnit.UnitTests | Microsoft.NET.Test.Sdk | 16.11.0 | Microsoft Software License	| SDK for Unit testing |		
 | NET.Core.XUnit.UnitTests | MockQueryable.Moq | 5.0.1 | MIT | Mocking .NET IQueryable collections  |
 | NET.Core.XUnit.UnitTests | Moq | 4.16.1 | BSD 3-Clause | Mocking |
 | NET.Core.XUnit.UnitTests | xunit | 2.4.1 | Apache-2.0 | Unit testing |

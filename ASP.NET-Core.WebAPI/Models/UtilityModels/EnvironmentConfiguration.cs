@@ -8,7 +8,7 @@
     /// </summary>
     public class EnvironmentConfiguration
     {
-        public string ASPNETCORE_ENVIRONMENT { get; set; } = "Development";
+        public string DOTNET_ENVIRONMENT { get; set; } = "Development";
 
         /* Logging - Serilog */
         public string SERILOG_LOGGING_LEVEL { get; set; } = "Error";

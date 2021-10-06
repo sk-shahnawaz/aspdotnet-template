@@ -13,7 +13,7 @@ namespace NET.Core.Console.DB.SqlServer
     /// </summary>
     public sealed class AppSqlServerDbContext : AppDbContext
     {
-        private readonly SqlConnectionStringBuilder _connectionStringBuilder;
+        private SqlConnectionStringBuilder _connectionStringBuilder;
 
         private readonly Func<string, string, string> ReadEnvironmentVariable = (string keyName, string @default)
             => Environment.GetEnvironmentVariable(keyName) ?? @default;
@@ -21,6 +21,18 @@ namespace NET.Core.Console.DB.SqlServer
         public AppSqlServerDbContext()
         {
             // This constructor is used when this project is run as standalone for performing DB Migrations.
+            ConfigureSQLServerConnection();
+        }
+
+        public AppSqlServerDbContext(DbContextOptions<AppDbContext> dbContextOptions)
+            : base(ChangeOptionsType(dbContextOptions))
+        {
+            // This constructor is used when the application is run. Parameters are injected by DI system.
+            ConfigureSQLServerConnection();
+        }
+
+        private void ConfigureSQLServerConnection()
+        {
             _connectionStringBuilder = new()    // C# 9.0
             {
                 DataSource = string.Concat(ReadEnvironmentVariable("SQLHOST", string.Empty), ",", ReadEnvironmentVariable("SQLPORT", "1433")),
@@ -32,25 +44,6 @@ namespace NET.Core.Console.DB.SqlServer
                 TrustServerCertificate = true,
             };
         }
-
-        public AppSqlServerDbContext(string sqlHost, string sqlPort, string sqlDatabase, string sqlUser, string sqlPassword)
-        {
-            // This constructor is used when the application is run. Parameters are injected by DI system.
-            _connectionStringBuilder = new()    // C# 9.0
-            {
-                DataSource = string.Concat(sqlHost, ",", sqlPort),
-                InitialCatalog = sqlDatabase,
-                UserID = sqlUser,
-                Password = sqlPassword,
-                PersistSecurityInfo = false,
-                MultipleActiveResultSets = true,
-                TrustServerCertificate = true
-            };
-        }
-
-        public AppSqlServerDbContext(DbContextOptions<AppDbContext> dbContextOptions)
-            : base(dbContextOptions)
-        { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
