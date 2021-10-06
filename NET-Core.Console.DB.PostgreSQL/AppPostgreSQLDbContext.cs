@@ -13,13 +13,26 @@ namespace NET.Core.Console.DB.PostgreSQL
     /// </summary>
     public sealed class AppPostgreSQLDbContext : AppDbContext
     {
-        private readonly string _pgVersion;
-        private readonly NpgsqlConnectionStringBuilder _connectionStringBuilder;
+        private string _pgVersion;
+        private NpgsqlConnectionStringBuilder _connectionStringBuilder;
 
         private readonly Func<string, string, string> ReadEnvironmentVariable = (string keyName, string @default)
             => Environment.GetEnvironmentVariable(keyName) ?? @default;
 
         public AppPostgreSQLDbContext()
+        {
+            // This constructor is used when this project is run as a standalone project to perform database migrations.
+            ConfigurePostgreSqlConnection();
+        }
+
+        public AppPostgreSQLDbContext(DbContextOptions<AppPostgreSQLDbContext> dbContextOptions)
+            : base(ChangeOptionsType(dbContextOptions))
+        {
+            // This constructor is used when the application is run. Parameters are injected by DI system.
+            ConfigurePostgreSqlConnection();
+        }
+
+        private void ConfigurePostgreSqlConnection()
         {
             // This constructor is used when this project is run as standalone for performing DB Migrations.
             _connectionStringBuilder = new()
@@ -36,31 +49,11 @@ namespace NET.Core.Console.DB.PostgreSQL
             _pgVersion = ReadEnvironmentVariable("PGVERSION", "11.8");
         }
 
-        public AppPostgreSQLDbContext(string pgHost, string pgPort, string pgDatabase, string pgUser, string pgPassword, string pgVersion)
-        {
-            // This constructor is used when the application is run. Parameters are injected by DI system.
-            _connectionStringBuilder = new()
-            {
-                Host = pgHost ?? string.Empty,
-                Port = int.Parse(pgPort ?? "5432"),
-                Database = pgDatabase ?? string.Empty,
-                Username = pgUser ?? string.Empty,
-                Password = pgPassword ?? string.Empty,
-                PersistSecurityInfo = false,
-                TrustServerCertificate = true,
-                Pooling = true
-            };
-            _pgVersion = pgVersion ?? "11.8";
-        }
-
-        public AppPostgreSQLDbContext(DbContextOptions<AppDbContext> dbContextOptions)
-            : base(dbContextOptions)
-        { }
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (_connectionStringBuilder != null)
                 optionsBuilder.UseNpgsql(_connectionStringBuilder.ConnectionString, options => options.EnableRetryOnFailure(3).SetPostgresVersion(new Version(_pgVersion)));
+            base.OnConfiguring(optionsBuilder);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -15,7 +15,7 @@ namespace ASP.NET.Core.WebAPI.Helpers.ServiceExtensions
         /// <param name="environmentConfiguration">A strongly typed instance representing application's environment variables</param>
         internal static void AddCors(this IServiceCollection serviceCollection, EnvironmentConfiguration environmentConfiguration)
         {
-            string applicationEnvironment = environmentConfiguration?.ASPNETCORE_ENVIRONMENT ?? "Production";
+            string applicationEnvironment = environmentConfiguration?.DOTNET_ENVIRONMENT ?? Microsoft.Extensions.Hosting.Environments.Production;
             serviceCollection.AddCors(options =>
             {
                 options.AddPolicy(AppResources.CorsPolicyName,

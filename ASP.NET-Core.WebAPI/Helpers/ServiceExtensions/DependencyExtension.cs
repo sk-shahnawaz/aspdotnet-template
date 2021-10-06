@@ -1,15 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Serilog;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
 
 using NET.Core.Console.DB.PostgreSQL;
 using NET.Core.Console.DB.SqlServer;
-using ASP.NET.Core.WebAPI.Models.DTOs;
-using NET.Core.Library.Domain.DBModels;
 using ASP.NET.Core.WebAPI.Utilities;
 using NET.Core.Library.Domain.Infrastructure;
 using ASP.NET.Core.WebAPI.Models.UtilityModels;
 using NET.Core.Library.Domain.Infrastructure.Contracts;
-using Microsoft.AspNetCore.Mvc;
 using ASP.NET.Core.WebAPI.Helpers.Services;
 
 namespace ASP.NET.Core.WebAPI.Helpers.ServiceExtensions
@@ -32,7 +33,7 @@ namespace ASP.NET.Core.WebAPI.Helpers.ServiceExtensions
                     serviceCollection.AddDbContext<AppDbContext>(optionsAction =>
                     {
                         optionsAction.UseInMemoryDatabase(applicationConfiguration.IN_MEMORY_DATABASE_NAME);
-                        optionsAction.EnableSensitiveDataLogging(false);
+                        optionsAction.AddDatabaseActionMonitoring(environmentConfiguration.DOTNET_ENVIRONMENT);
                     });
                 }
                 else
@@ -49,10 +50,10 @@ namespace ASP.NET.Core.WebAPI.Helpers.ServiceExtensions
                     if (AppUtilities.InspectPostgreSQLDbParams(environmentConfiguration))
                     {
                         // Register database context class (The class must inherit AppDbContext) 
-                        serviceCollection.AddScoped<IAppDbContext>(provider => new AppPostgreSQLDbContext(environmentConfiguration?.PGHOST, environmentConfiguration?.PGPORT, environmentConfiguration?.PGDATABASE, environmentConfiguration?.PGUSER, environmentConfiguration?.PGPASSWORD, environmentConfiguration?.PGVERSION));
+                        serviceCollection.AddScoped<IAppDbContext, AppPostgreSQLDbContext>();
                         serviceCollection.AddDbContext<AppPostgreSQLDbContext>(optionsAction =>
                         {
-                            optionsAction.EnableSensitiveDataLogging(false);
+                            optionsAction.AddDatabaseActionMonitoring(environmentConfiguration.DOTNET_ENVIRONMENT);
                         });
                     }
                     else
@@ -69,10 +70,10 @@ namespace ASP.NET.Core.WebAPI.Helpers.ServiceExtensions
                     if (AppUtilities.InspectSqlServerDbParams(environmentConfiguration))
                     {
                         // Register database context class (The class must inherit AppDbContext) 
-                        serviceCollection.AddScoped<IAppDbContext>(provider => new AppSqlServerDbContext(environmentConfiguration?.SQLHOST, environmentConfiguration?.SQLPORT, environmentConfiguration?.SQLDATABASE, environmentConfiguration?.SQLUSER, environmentConfiguration?.SQLPASSWORD));
-                        serviceCollection.AddDbContext<AppSqlServerDbContext>(optionsAction =>
+                        serviceCollection.AddScoped<IAppDbContext, AppSqlServerDbContext>();
+                        serviceCollection.AddDbContext<AppPostgreSQLDbContext>(optionsAction =>
                         {
-                            optionsAction.EnableSensitiveDataLogging(false);
+                            optionsAction.AddDatabaseActionMonitoring(environmentConfiguration.DOTNET_ENVIRONMENT);
                         });
                     }
                     else
@@ -96,6 +97,16 @@ namespace ASP.NET.Core.WebAPI.Helpers.ServiceExtensions
 
             /* Custom service registration */
             serviceCollection.AddScoped<IUrlHelper>(serviceProvider => UrlHelperService.GetUrlHelper(serviceProvider));
+        }
+
+        private static void AddDatabaseActionMonitoring(this DbContextOptionsBuilder dbContextOptionsBuilder, string hostingEnvironment)
+        {
+            if (hostingEnvironment == Environments.Development)
+            {
+                dbContextOptionsBuilder.EnableSensitiveDataLogging(true);
+                dbContextOptionsBuilder.EnableDetailedErrors(true);
+                dbContextOptionsBuilder.LogTo(Log.Logger.Information, LogLevel.Information, null);
+            }
         }
     }
 }
