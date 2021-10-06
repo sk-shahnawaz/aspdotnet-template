@@ -83,25 +83,21 @@ Please read [CONTRIBUTING.md](/CONTRIBUTING.md) before starting to contribute in
 | ASP.NET-Core.WebAPI | Swashbuckle.AspNetCore.Annotations | 6.2.2 | MIT | API documentation annotations |
 | ASP.NET-Core.WebAPI | Swashbuckle.AspNetCore.Newtonsoft | 6.2.2 | MIT | Serialization & Deserialization for API documentation |
 | ASP.NET-Core.WebAPI | Microsoft.AspNetCore.OData | 7.5.8 | MIT | OData functionality on top of Web API |
-
 | NET.Core.Library.Domain | Microsoft.AspNetCore.Http.Abstractions | 2.2.0 | Microsoft Software License |
 | NET.Core.Library.Domain | Microsoft.EntityFrameworkCore | 5.0.10 | Apache-2.0 | ORM framework
 | NET.Core.Console.DB.Domain | Microsoft.EntityFrameworkCore.Tools | 5.0.10 | EF Core migration |
 | NET.Core.Library.Domain | Microsoft.EntityFrameworkCore.Design | 5.0.10 | Apache-2.0| ORM framework, Schema design |
-
 | NET.Core.Console.DB.PostgreSQL | Microsoft.EntityFrameworkCore.Design | 5.0.10 | Apache-2.0| ORM dramework, Schema design |
 | NET.Core.Console.DB.PostgreSQL | Microsoft.Extensions.Logging.Console | 5.0.0 | MIT | Console logging |
 | NET.Core.Console.DB.PostgreSQL | Npgsql.EntityFrameworkCore.PostgreSQL | 5.0.10 | PostgreSQL | ORM framework for PostgreSQL |
 | NET.Core.Console.DB.PostgreSQL | Microsoft.EntityFrameworkCore | 5.0.10 | Apache-2.0 | ORM framework |
 | NET.Core.Console.DB.PostgreSQL | Microsoft.EntityFrameworkCore.Tools | 5.0.6 | Apache-2.0 | EF Core migration |
-
 | NET.Core.Console.DB.SqlServer | Microsoft.Data.SqlClient | 3.0.1 | Apache-2.0 | Client for SQL Server |
 | NET.Core.Console.DB.SqlServer | Microsoft.EntityFrameworkCore.Design | 5.0.10 | MIT | ORM dramework, Schema design |
 | NET.Core.Console.DB.SqlServer | Npgsql.EntityFrameworkCore.SqlServer | 5.0.10 | Apache-2.0 | ORM framework for SQL Server |
 | NET.Core.Console.DB.SqlServer | Microsoft.Extensions.Logging.Console | 5.0.0 | MIT | Console logging |
 | NET.Core.Console.DB.SqlServer | Microsoft.EntityFrameworkCore | 5.0.10 | Apache-2.0 | ORM framework |
 | NET.Core.Console.DB.SqlServer | Microsoft.EntityFrameworkCore.Tools | 5.0.10 | EF Core migration |
-
 | NET.Core.XUnit.UnitTests | AutoMapper | 10.1.1 | MIT | Automapping |
 | NET.Core.XUnit.UnitTests | coverlet.collector | 3.1.0 | MIT | Mocker for unit testing
 | NET.Core.XUnit.UnitTests | Microsoft.NET.Test.Sdk | 16.11.0 | Microsoft Software License	| SDK for Unit testing |		
