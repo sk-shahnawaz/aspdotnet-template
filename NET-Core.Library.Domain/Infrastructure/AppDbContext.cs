@@ -14,8 +14,8 @@ namespace NET.Core.Library.Domain.Infrastructure
     {
         public AppDbContext()
         {
-            // This constructor is included so as to provide the capability to initialize the sub-class AppPostgreSQLDbContext without any parameters,
-            // (i.e. Default Constructor), it is required when the project "NET-Core.Console.DB.PostgreSQL" is executed standalone for performing DB migrations.
+            // This constructor is included so as to provide the capability to initialize the sub-class AppSqlServerDbContext/AppPostgreSQLDbContext without any parameters,
+            // (i.e. Default Constructor), it is required when the project "NET-Core.Console.DB.SqlServer"/"NET-Core.Console.DB.PostgreSQL" is executed stand-alone for performing DB migrations.
         }
 
         public AppDbContext(DbContextOptions<AppDbContext> dbContextOptions)
