@@ -18,7 +18,7 @@ namespace ASP.NET.Core.WebAPI.Helpers.ServiceExtensions
     internal static class DependencyExtension
     {
         /// <summary>
-        /// Registers depedencies which will be injected by runtime during application's life-time. Registers AutoMapper mapping profiles.
+        /// Registers depedencies which will be injected by runtime during application's life-time.
         /// </summary>
         /// <param name="serviceCollection">Abstraction of type IServiceCollection</param>
         /// <param name="environmentConfiguration">A strongly typed instance representing application's environment variables</param>
