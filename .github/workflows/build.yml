@@ -22,5 +22,19 @@ jobs:
       - name: Build with .NET
         run: dotnet build --force --verbosity minimal --configuration Release --no-restore
       - name: Test with .NET
-        working-directory: ./NET-Core.XUnit.UnitTests
-        run: dotnet test --settings "test.runsettings" --configuration Release
+        run: dotnet test ./Template.sln --no-build --verbosity normal --configuration Release --settings "./NET-Core.XUnit.UnitTests/test.runsettings" /p:CollectCoverage=true /p:Exclude="[NET*.Console.*]*" --collect:"XPlat Code Coverage" --results-directory test-coverage
+      - name: Copy Coverage To Predictable Location
+        run: cp test-coverage/*/coverage.cobertura.xml test-coverage/coverage.cobertura.xml
+      - name: Code Coverage Summary Report
+        uses: irongut/CodeCoverageSummary@v1.0.2
+        with:
+          filename: test-coverage/coverage.cobertura.xml
+          badge: true
+          format: 'markdown'
+          output: 'both'
+      - name: Add Coverage PR Comment
+        uses: marocchino/sticky-pull-request-comment@v2
+        if: github.event_name == 'pull_request'
+        with:
+          recreate: true
+          path: code-coverage-results.md
