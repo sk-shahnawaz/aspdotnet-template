@@ -9,4 +9,13 @@
 			<ENV_NAME>{ENV_VALUE}</ENV_NAME>
 		</EnvironmentVariables>
 	</RunConfiguration>
+	<DataCollectionRunSettings>
+		<DataCollectors>
+			<DataCollector friendlyName="XPlat code coverage">
+				<Configuration>
+					<Exclude>[NET*.Console.*]*</Exclude>
+				</Configuration>
+			</DataCollector>
+		</DataCollectors>
+	</DataCollectionRunSettings>
 </RunSettings>
