@@ -8,7 +8,7 @@
     /// </summary>
     public class EnvironmentConfiguration
     {
-        public string DOTNET_ENVIRONMENT { get; set; } = "Development";
+        public string DOTNET_ENVIRONMENT { get; set; } = Microsoft.Extensions.Hosting.Environments.Production;
 
         /* Logging - Serilog */
         public string SERILOG_LOGGING_LEVEL { get; set; } = "Error";

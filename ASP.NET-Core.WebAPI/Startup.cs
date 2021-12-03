@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Microsoft.AspNet.OData.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
@@ -87,12 +88,14 @@ namespace ASP.NET.Core.WebAPI
                 Accessed: 2021-06-01
              */
 
-            ApplicationConfiguration applicationConfiguration = app.ApplicationServices.CreateScope().ServiceProvider.GetService<Microsoft.Extensions.Options.IOptions<ApplicationConfiguration>>().Value;
+            EnvironmentConfiguration environmentConfiguration = app.ApplicationServices.CreateScope().ServiceProvider.GetService<IOptions<EnvironmentConfiguration>>().Value;
+            ApplicationConfiguration applicationConfiguration = app.ApplicationServices.CreateScope().ServiceProvider.GetService<IOptions<ApplicationConfiguration>>().Value;
+
             if (applicationConfiguration?.UseInMemoryDatabase ?? false)
             {
                 InMemoryDbDataSeeder.SeedTestData(app);
             }
-            if (env.IsDevelopment())
+            if (environmentConfiguration?.DOTNET_ENVIRONMENT == Environments.Development)
             {
                 app.UseDeveloperExceptionPage();
             }
