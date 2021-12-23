@@ -2,6 +2,7 @@
 using System.Net.Mime;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Converters;
 using Microsoft.Net.Http.Headers;
 using Newtonsoft.Json.Serialization;
 using Microsoft.AspNet.OData.Formatter;
@@ -44,6 +45,7 @@ namespace ASP.NET.Core.WebAPI.Helpers.ServiceExtensions
                 .AddNewtonsoftJson(options =>
                 {
                     options.SerializerSettings.Converters.Add(new DateConverter());
+                    options.SerializerSettings.Converters.Add(new StringEnumConverter());
                     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
 
                     // DefaultContractResolver : Pascal Case : "ThisIsPascalCase"
