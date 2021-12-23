@@ -91,9 +91,10 @@ namespace ASP.NET.Core.WebAPI.Controllers.v1
         #region --- GET All Authors ---
 
         /// <summary>
-        /// Gets all authors with pagination.
+        /// Gets all authors with pagination and sorting.
         /// </summary>
         /// <param name="pagination">Pagination request (PageNumber, PageSize)</param>
+        /// <param name="sorting">Sorting request (SortByAttribute, SortOrder)</param>
         /// <returns>List of authors</returns>
         [HttpGet]
         [Microsoft.AspNet.OData.EnableQuery]
@@ -102,13 +103,16 @@ namespace ASP.NET.Core.WebAPI.Controllers.v1
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         [SwaggerOperation(Summary = "Returns all Authors")]
-        public async Task<IActionResult> GetAuthors([FromQuery] PaginationRequest pagination)
+        public async Task<IActionResult> GetAuthors([FromQuery] PaginationRequest pagination, [FromQuery] SortingRequest sorting)
         {
             try
             {
                 IQueryable<Author> query = _authorsRepository.AsQueryable(trackEntity: false).Include(author => author.Books);
-                List<Author> authors = await query.Skip((pagination.PageNumber - 1) * pagination.PageSize).Take(pagination.PageSize).ToListAsync();
-                if (authors?.Count > 0)
+                List<Author> authors = await query.Sort<Author, AuthorDTO>(sorting, _mapper)
+                                                .Skip((pagination.PageNumber - 1) * pagination.PageSize)
+                                                    .Take(pagination.PageSize)
+                                                        .ToListAsync();
+                if (authors?.Any() ?? false)
                 {
                     List<AuthorDTO> authorDTOs = _mapper.Map<List<Author>, List<AuthorDTO>>(authors);
                     authorDTOs.ForEach(authorDTO => authorDTO.Links = LinkDTO.GenerateHateoasLinks(_urlHelper, authorDTO.Id, ControllerContext));
@@ -152,7 +156,6 @@ namespace ASP.NET.Core.WebAPI.Controllers.v1
             try
             {
                 if (!await _authorsRepository.AsQueryable(trackEntity: false).AnyAsync(storedAuthor => string.Equals(storedAuthor.Email, authorDTO.EmailAddress)))
-
                 {
                     Author author = _mapper.Map<AuthorDTO, Author>(authorDTO);
                     if (author != null)
