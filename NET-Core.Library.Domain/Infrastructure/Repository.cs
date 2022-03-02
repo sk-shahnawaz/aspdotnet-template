@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Linq.Expressions;
+using System.Collections.Generic;
+
 using Microsoft.EntityFrameworkCore;
 
 using NET.Core.Library.Domain.Infrastructure.Contracts;
@@ -56,6 +58,14 @@ namespace NET.Core.Library.Domain.Infrastructure
                 throw new ArgumentException(_argumentMissingErrorMessage);
 
             _appDbContext.Set<T>().Remove(item);
+        }
+
+        public void DeleteBatch(IEnumerable<T> items)
+        {
+            if (items?.Any() ?? false)
+            {
+                _appDbContext.Set<T>().RemoveRange(items);
+            }
         }
 
         public T Get(Expression<Func<T, bool>> expression, bool trackEntity = true)

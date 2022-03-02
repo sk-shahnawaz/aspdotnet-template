@@ -26,6 +26,8 @@ namespace NET.Core.Library.Domain.Infrastructure.Contracts
 
         void Delete(T item);
 
+        void DeleteBatch(System.Collections.Generic.IEnumerable<T> items);
+
         void Dispose();
     }
 }
