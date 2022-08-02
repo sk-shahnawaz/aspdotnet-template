@@ -9,7 +9,9 @@ using Microsoft.AspNet.OData.Formatter;
 using Microsoft.AspNet.OData.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 
+using ASP.NET.Core.WebAPI.Models.DTOs;
 using ASP.NET.Core.WebAPI.Models.UtilityModels;
+using ASP.NET.Core.WebAPI.Infrastructure.API.Filters;
 using ASP.NET.Core.WebAPI.Infrastructure.API.Converters;
 
 namespace ASP.NET.Core.WebAPI.Helpers.ServiceExtensions
@@ -23,23 +25,23 @@ namespace ASP.NET.Core.WebAPI.Helpers.ServiceExtensions
         /// <param name="applicationConfiguration">Strongly typed instance of Application Configuration</param>
         internal static void AddWebApi(this IServiceCollection serviceCollection, ApplicationConfiguration applicationConfiguration)
         {
-            serviceCollection.AddControllers()
+            serviceCollection.AddControllers(options => options.Filters.Add(new GlobalErrorResponseFilter()))
                 .ConfigureApiBehaviorOptions(options =>
                 {
                     // Executes when Model Binding fails for Controllers decorated with APIController attribute.
                     options.InvalidModelStateResponseFactory = (context) =>
                     {
-                        ValidationProblemDetails validationProblemDetails = new(context.ModelState)
+                        ErrorResponse error = new(new ProblemDetails
                         {
-                            Status = Microsoft.AspNetCore.Http.StatusCodes.Status400BadRequest,
+                            Status = StatusCodes.Status400BadRequest,
                             Instance = context.HttpContext.TraceIdentifier,
                             Title = Utilities.AppResources.ModelValidationErrorMessage,
                             Detail = "Bad Request"
+                        }, context.ModelState);
+                        return new ObjectResult(error)
+                        {
+                            StatusCode = Microsoft.AspNetCore.Http.StatusCodes.Status400BadRequest
                         };
-
-                        BadRequestObjectResult result = new(validationProblemDetails);  // C# 9.0
-                        result.ContentTypes.Add(MediaTypeNames.Application.Json);
-                        return result;
                     };
                 })
                 .AddNewtonsoftJson(options =>
@@ -50,8 +52,7 @@ namespace ASP.NET.Core.WebAPI.Helpers.ServiceExtensions
 
                     // DefaultContractResolver : Pascal Case : "ThisIsPascalCase"
                     options.SerializerSettings.ContractResolver = new DefaultContractResolver();
-                })
-                .SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0);
+                });
 
             if (applicationConfiguration?.EnableOData ?? false)
             {

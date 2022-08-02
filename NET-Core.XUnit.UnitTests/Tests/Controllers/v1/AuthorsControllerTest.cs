@@ -25,10 +25,10 @@ namespace NET.Core.XUnit.UnitTests.Tests.Controllers.v1
             Author author = new() { Id = id };
 
             List<Author> authorsMock = new() { author };
-            Mock<IQueryable<Author>> authorQueryableMock = authorsMock.AsQueryable().BuildMock();
+            IQueryable<Author> authorQueryableMock = authorsMock.AsQueryable().BuildMock();
 
             Mock<IRepository<Author>> authorRepositoryMock = new();
-            authorRepositoryMock.Setup(repository => repository.AsQueryable(false)).Returns(authorQueryableMock.Object).Verifiable();
+            authorRepositoryMock.Setup(repository => repository.AsQueryable(false)).Returns(authorQueryableMock).Verifiable();
 
             Mock<IMapper> mapperMock = new();
             mapperMock.Setup(mapper => mapper.Map<Author, AuthorDTO>(It.IsAny<Author>())).Returns(new AuthorDTO() { Id = id, FirstName = "Test" });
@@ -57,10 +57,10 @@ namespace NET.Core.XUnit.UnitTests.Tests.Controllers.v1
             Author author = new() { Id = id };
 
             List<Author> authorsMock = new() { author };
-            Mock<IQueryable<Author>> authorQueryableMock = authorsMock.AsQueryable().BuildMock();
+            IQueryable<Author> authorQueryableMock = authorsMock.AsQueryable().BuildMock();
 
             Mock<IRepository<Author>> authorRepositoryMock = new();
-            authorRepositoryMock.Setup(repository => repository.AsQueryable(false)).Returns(authorQueryableMock.Object).Verifiable();
+            authorRepositoryMock.Setup(repository => repository.AsQueryable(false)).Returns(authorQueryableMock).Verifiable();
 
             Mock<IMapper> mapperMock = new();
             mapperMock.Setup(mapper => mapper.Map<Author, AuthorDTO>(It.IsAny<Author>())).Returns(new AuthorDTO() { Id = id, FirstName = "Test" });

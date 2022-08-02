@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Linq.Expressions;
 using Microsoft.Extensions.Configuration;
 using ASP.NET.Core.WebAPI.Models.UtilityModels;
+using AutoMapper.Internal;
 
 namespace ASP.NET.Core.WebAPI.Utilities
 {
@@ -125,42 +126,25 @@ namespace ASP.NET.Core.WebAPI.Utilities
 
         private static PropertyInfo GetSortingKeyInfo<TItem, TItemDTO>(SortingRequest sortingRequest, IMapper mapper)
         {
-            PropertyInfo propertyInfo = typeof(TItemDTO).GetProperties().FirstOrDefault(prop => prop.Name.Equals(sortingRequest.SortByAttribute.Trim(), StringComparison.OrdinalIgnoreCase));
-            if (propertyInfo == null)
+            PropertyInfo propertyInfo = typeof(TItemDTO).GetProperties().FirstOrDefault(prop => prop.Name.Equals(sortingRequest.SortByAttribute.ToString(), StringComparison.OrdinalIgnoreCase));
+
+            // Verify if the property to do sorting sent by client exists or not
+            // Can't allow sorting on READONLY properties (no SETTER), example FullName of AuthorDTO, because for FullName, corresponding property/database column doesn't exist
+            // Allow sorting only on native types, no user-defined types allowed
+            if (propertyInfo == null || !propertyInfo.CanWrite || !CheckIfSortableProperty(propertyInfo.PropertyType))
             {
-                // Verify if the property to do sorting sent by client exists or not
-
-                sortingRequest.SortByAttribute = "Id";
-                propertyInfo = typeof(TItemDTO).GetProperty(sortingRequest.SortByAttribute);
+                propertyInfo = typeof(TItemDTO).GetProperty(sortingRequest.SortByAttribute.ToString());
             }
-            else
-            {
-                if (!propertyInfo.CanWrite)
-                {
-                    // Can't allow sorting on READONLY properties (no SETTER), example FullName of AuthorDTO, because for FullName, corresponding property/database column doesn't exist
-
-                    sortingRequest.SortByAttribute = "Id";
-                    propertyInfo = typeof(TItemDTO).GetProperty(sortingRequest.SortByAttribute);
-                }
-                if (!CheckIfSortableProperty(propertyInfo.PropertyType))
-                {
-                    // Allow sorting only on native types, no user-defined types allowed
-
-                    sortingRequest.SortByAttribute = "Id";
-                    propertyInfo = typeof(TItemDTO).GetProperty(sortingRequest.SortByAttribute);
-                }
-            }
-
-            var typeMap = mapper.ConfigurationProvider.FindTypeMapFor<TItemDTO, TItem>();
+            var typeMap = mapper.ConfigurationProvider.Internal().GetAllTypeMaps().SingleOrDefault(mapping => mapping.SourceType == typeof(TItemDTO));
             string modelMemberName = string.Empty;
             if (typeMap is not null)
             {
-                var propertyMap = typeMap.PropertyMaps.FirstOrDefault(pm => pm.SourceMember.Name.Equals(sortingRequest.SortByAttribute, StringComparison.OrdinalIgnoreCase));
-                modelMemberName = propertyMap.DestinationMember.Name;
+                var propertyMap = typeMap.PropertyMaps.FirstOrDefault(pm => pm.SourceMember.Name.Equals(sortingRequest.SortByAttribute.ToString(), StringComparison.OrdinalIgnoreCase));
+                modelMemberName = propertyMap != null ? propertyMap.DestinationMember.Name : string.Empty;
             }
             else
             {
-                modelMemberName = sortingRequest.SortByAttribute;
+                modelMemberName = sortingRequest.SortByAttribute.ToString();
             }
 
             return typeof(TItem).GetProperties().FirstOrDefault(prop => prop.Name.Equals(modelMemberName, StringComparison.OrdinalIgnoreCase));
