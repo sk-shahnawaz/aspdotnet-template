@@ -61,8 +61,8 @@ namespace ASP.NET.Core.WebAPI
              *  then move provider logic in separate class (Single Responsibilty principle). 
             */
 
-            services.AddOptions<EnvironmentConfiguration>(Configuration, out EnvironmentConfiguration environmentConfiguration);
-            services.AddOptions<ApplicationConfiguration>(Configuration, out ApplicationConfiguration applicationConfiguration);
+            services.AddOptions(Configuration, out EnvironmentConfiguration environmentConfiguration);
+            services.AddOptions(Configuration, out ApplicationConfiguration applicationConfiguration);
             services.AddLogging(environmentConfiguration);
             services.AddCors(environmentConfiguration);
             services.AddRoutingConfigurations();
@@ -78,18 +78,16 @@ namespace ASP.NET.Core.WebAPI
         /// This method gets called by the runtime. Use this method to configure the HTTP request processing pipeline.
         /// </summary>
         /// <param name="app">An abstraction which provides mechanisms to configure the HTTP request processing pipeline.</param>
-        /// <param name="env">An abstraction which provides information about the web hosting environment within which this application is running.</param>
         /// <param name="provider">An abstraction representing OpenAPI specification configuration</param>
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
+        /// <param name="environmentConfiguration">Strongly typed environmental configuration</param>
+        /// <param name="applicationConfiguration">Strongly typed application configuration</param>
+        public void Configure(IApplicationBuilder app, IApiVersionDescriptionProvider provider, EnvironmentConfiguration environmentConfiguration, ApplicationConfiguration applicationConfiguration)
         {
             /*
                 While configuring ASP.NET Core pipeline please follow:
                 https://docs.microsoft.com/en-us/aspnet/core/fundamentals/middleware/?view=aspnetcore-5.0#middleware-order
                 Accessed: 2021-06-01
              */
-
-            EnvironmentConfiguration environmentConfiguration = app.ApplicationServices.CreateScope().ServiceProvider.GetService<IOptions<EnvironmentConfiguration>>().Value;
-            ApplicationConfiguration applicationConfiguration = app.ApplicationServices.CreateScope().ServiceProvider.GetService<IOptions<ApplicationConfiguration>>().Value;
 
             if (applicationConfiguration?.UseInMemoryDatabase ?? false)
             {
