@@ -40,7 +40,7 @@ namespace ASP.NET.Core.WebAPI.Helpers.ServiceExtensions
                         }, context.ModelState);
                         return new ObjectResult(error)
                         {
-                            StatusCode = Microsoft.AspNetCore.Http.StatusCodes.Status400BadRequest
+                            StatusCode = StatusCodes.Status400BadRequest
                         };
                     };
                 })
