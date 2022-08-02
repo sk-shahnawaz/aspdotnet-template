@@ -5,6 +5,9 @@ services:
   build:
    context: .
    dockerfile: Dockerfile
+   args:
+    NEW_RELIC_LICENSE_KEY: add_new_relic_license_key
+    NEW_RELIC_APP_NAME: 'ASP.NET Template Application (Docker)'
   networks:
     - appnetwork
   ports:
