@@ -1,5 +1,6 @@
 ﻿using System;
 using Serilog;
+using System.Collections.Generic;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -29,6 +30,32 @@ namespace ASP.NET.Core.WebAPI.Helpers.ServiceExtensions
                         options.Dsn = environmentConfiguration.SENTRY_DSN;
                         options.Environment = environmentConfiguration.SENTRY_ENVIRONMENT;
                         options.Release = environmentConfiguration.SENTRY_RELEASE;
+
+                        // See: https://docs.sentry.io/platforms/dotnet/guides/aspnetcore/configuration/sampling [Accessed on 2022-06-06]
+                        options.SampleRate = 0.5f;
+                        options.TracesSampler = context =>
+                        {
+                            // If this is the continuation of a trace, just use that decision (rate controlled by the caller)
+                            if (context.TransactionContext.IsParentSampled is not null)
+                            {
+                                return context.TransactionContext.IsParentSampled.Value
+                                    ? 1.0
+                                    : 0.0;
+                            }
+
+                            // Otherwise, sample based on URL (exposed through custom sampling context)
+                            return context.CustomSamplingContext.GetValueOrDefault("url") switch
+                            {
+                                // The health check endpoint is just noise - drop all transactions
+                                "/health" => 0.0,
+
+                                // Open API documentation endpoint
+                                "/api-docs/*" => 0.0,
+
+                                // Default sample rate
+                                _ => 0.3
+                            };
+                        };
                     });
                 }
             });
