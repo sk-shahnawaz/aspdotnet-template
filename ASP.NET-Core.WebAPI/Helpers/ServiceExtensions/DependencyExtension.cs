@@ -12,6 +12,8 @@ using NET.Core.Library.Domain.Infrastructure;
 using ASP.NET.Core.WebAPI.Models.UtilityModels;
 using NET.Core.Library.Domain.Infrastructure.Contracts;
 using ASP.NET.Core.WebAPI.Helpers.Services;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace ASP.NET.Core.WebAPI.Helpers.ServiceExtensions
 {
@@ -96,7 +98,11 @@ namespace ASP.NET.Core.WebAPI.Helpers.ServiceExtensions
             serviceCollection.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
             /* Custom service registration */
-            serviceCollection.AddScoped<IUrlHelper>(serviceProvider => UrlHelperService.GetUrlHelper(serviceProvider));
+
+            // https://stackoverflow.com/a/48278882/4287015 (Accessed on 2022-08-03)
+            serviceCollection.TryAddSingleton<IActionContextAccessor, ActionContextAccessor>();
+
+            serviceCollection.AddScoped(serviceProvider => UrlHelperService.GetUrlHelper(serviceProvider));
         }
 
         private static void AddDatabaseActionMonitoring(this DbContextOptionsBuilder dbContextOptionsBuilder, string hostingEnvironment)

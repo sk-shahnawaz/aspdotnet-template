@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
-using Microsoft.AspNet.OData.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,6 +11,8 @@ using ASP.NET.Core.WebAPI.Models.UtilityModels;
 using ASP.NET.Core.WebAPI.Infrastructure.EFCore;
 using ASP.NET.Core.WebAPI.Helpers.ServiceExtensions;
 using ASP.NET.Core.WebAPI.Helpers.Middlewares;
+using Microsoft.OData.Edm;
+using ASP.NET.Core.WebAPI.Models.DTOs;
 
 namespace ASP.NET.Core.WebAPI
 {
@@ -105,11 +106,6 @@ namespace ASP.NET.Core.WebAPI
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
-                if (applicationConfiguration?.EnableOData ?? false)
-                {
-                    endpoints.EnableDependencyInjection();
-                    endpoints.Select().Expand().Filter();
-                }
                 endpoints.MapControllers();
                 endpoints.MapHealthChecks("/health");
             });

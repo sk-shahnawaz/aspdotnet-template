@@ -5,14 +5,16 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Converters;
 using Microsoft.Net.Http.Headers;
 using Newtonsoft.Json.Serialization;
-using Microsoft.AspNet.OData.Formatter;
-using Microsoft.AspNet.OData.Extensions;
-using Microsoft.Extensions.DependencyInjection;
 
-using ASP.NET.Core.WebAPI.Models.DTOs;
 using ASP.NET.Core.WebAPI.Models.UtilityModels;
 using ASP.NET.Core.WebAPI.Infrastructure.API.Filters;
 using ASP.NET.Core.WebAPI.Infrastructure.API.Converters;
+using Microsoft.AspNetCore.OData.Formatter;
+using Microsoft.AspNetCore.OData;
+using Microsoft.OData.Edm;
+using Microsoft.OData.ModelBuilder;
+using NET.Core.Library.Domain.DBModels;
+using ASP.NET.Core.WebAPI.Models.DTOs;
 
 namespace ASP.NET.Core.WebAPI.Helpers.ServiceExtensions
 {
@@ -25,7 +27,8 @@ namespace ASP.NET.Core.WebAPI.Helpers.ServiceExtensions
         /// <param name="applicationConfiguration">Strongly typed instance of Application Configuration</param>
         internal static void AddWebApi(this IServiceCollection serviceCollection, ApplicationConfiguration applicationConfiguration)
         {
-            serviceCollection.AddControllers(options => options.Filters.Add(new GlobalErrorResponseFilter()))
+            serviceCollection
+                .AddControllers(options => options.Filters.Add(new GlobalErrorResponseFilter()))
                 .ConfigureApiBehaviorOptions(options =>
                 {
                     // Executes when Model Binding fails for Controllers decorated with APIController attribute.
@@ -56,7 +59,6 @@ namespace ASP.NET.Core.WebAPI.Helpers.ServiceExtensions
 
             if (applicationConfiguration?.EnableOData ?? false)
             {
-                serviceCollection.AddOData();
                 serviceCollection.AddMvcCore(options =>
                 {
                     // To support Swagger API document generation when OData is included
@@ -69,8 +71,20 @@ namespace ASP.NET.Core.WebAPI.Helpers.ServiceExtensions
                     {
                         inputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/prs.odatatestxx-odata"));
                     }
+                })
+                .AddOData(options =>
+                {
+                    options.AddRouteComponents("v1", GetEdmModel()).Filter().Select().Expand().Count().OrderBy();
                 });
             }
+        }
+
+        private static IEdmModel GetEdmModel()
+        {
+            ODataConventionModelBuilder builder = new();
+            builder.EntitySet<Author>("Author");
+            builder.EntitySet<Book>("Book");
+            return builder.GetEdmModel();
         }
     }
 }

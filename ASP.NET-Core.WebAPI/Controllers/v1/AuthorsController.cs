@@ -17,6 +17,8 @@ using NET.Core.Library.Domain.DBModels;
 using ASP.NET.Core.WebAPI.Models.UtilityModels;
 using NET.Core.Library.Domain.Infrastructure.Contracts;
 using ASP.NET.Core.WebAPI.Models.DTOs.Contracts;
+using Microsoft.AspNetCore.OData.Routing.Controllers;
+using Microsoft.AspNetCore.OData.Query;
 
 namespace ASP.NET.Core.WebAPI.Controllers.v1
 {
@@ -26,7 +28,7 @@ namespace ASP.NET.Core.WebAPI.Controllers.v1
     [Route("api/v{version:apiVersion}/[controller]")]
     [EnableCors(AppResources.CorsPolicyName)]
     [SwaggerTag(AppResources.ApiDescriptor + nameof(Author))]
-    public class AuthorsController : ControllerBase, IDisposable
+    public class AuthorsController : ODataController, IDisposable
     {
         #region --- Global Variables ---
 
@@ -57,7 +59,7 @@ namespace ASP.NET.Core.WebAPI.Controllers.v1
         /// <param name="id">ID of the author</param>
         /// <returns>A single author</returns>
         [HttpGet]
-        [Microsoft.AspNet.OData.EnableQuery]
+        [EnableQuery]
         [Route("{id:long:min(1)}", Name = nameof(GetAuthorById))]
         [ProducesResponseType(typeof(AuthorDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
@@ -97,7 +99,7 @@ namespace ASP.NET.Core.WebAPI.Controllers.v1
         /// <param name="sorting">Sorting request (SortByAttribute, SortOrder)</param>
         /// <returns>List of authors</returns>
         [HttpGet]
-        [Microsoft.AspNet.OData.EnableQuery]
+        [EnableQuery]
         [Route("", Name = nameof(GetAuthors))]
         [ProducesResponseType(typeof(PaginationResponse<AuthorDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
