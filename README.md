@@ -66,7 +66,7 @@ Please read [CONTRIBUTING.md](/CONTRIBUTING.md) before starting to contribute in
 ## Pre-configured Features:
 
 - Console logging using Serilog
-- Application monitoring using Sentry
+- Application monitoring using Sentry & New Relic
 - HTTPS redirection
 - Health check endpoint
 - CORS
@@ -81,7 +81,6 @@ Please read [CONTRIBUTING.md](/CONTRIBUTING.md) before starting to contribute in
 - Consistent & Machine readable error response using ProblemDetails
 - API Versioning
 - Open API documentation support using Swagger
-- Sentry & New Relic integration support
 - Unit Testing setup using XUnit, Moq, Generic Repository Pattern
 - Code Coverage Report Generation setup with report summary in GitHub PR as Bot Comment
 - Git Ignore, Docker Ignore, Dockerfile and Docker Compose script for containerization
