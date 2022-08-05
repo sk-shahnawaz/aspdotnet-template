@@ -1,11 +1,7 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
+﻿namespace NET.Core.Library.Domain.Infrastructure.Contracts;
 
-namespace NET.Core.Library.Domain.Infrastructure.Contracts
+public interface IAppDbContext
 {
-    public interface IAppDbContext
-    {
-        int SaveChanges();
-        Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
-    }
+    int SaveChanges();
+    Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

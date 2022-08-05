@@ -1,16 +1,12 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
+﻿namespace NET.Core.Library.Domain.Infrastructure.Contracts;
 
-namespace NET.Core.Library.Domain.Infrastructure.Contracts
+public interface IUnitOfWork
 {
-    public interface IUnitOfWork
-    {
-        int SaveChanges();
+    int SaveChanges();
 
-        Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
+    Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 
-        void Dispose();
+    void Dispose();
 
-        IAppDbContext Context { get; }
-    }
+    IAppDbContext Context { get; }
 }

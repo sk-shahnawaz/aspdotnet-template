@@ -1,150 +1,135 @@
-﻿using System;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Linq.Expressions;
-using System.Collections.Generic;
+﻿using System.Linq.Expressions;
 
 using Microsoft.EntityFrameworkCore;
 
 using NET.Core.Library.Domain.Infrastructure.Contracts;
 
-namespace NET.Core.Library.Domain.Infrastructure
+namespace NET.Core.Library.Domain.Infrastructure;
+
+/// <summary>
+/// Implementor of IRepository<T> abstraction
+/// </summary>
+/// <typeparam name="T">Generic type argument, representing abstraction of IEntity</typeparam>
+public sealed class Repository<T> : IRepository<T>
+    where T : class
 {
-    /// <summary>
-    /// Implementor of IRepository<T> abstraction
-    /// </summary>
-    /// <typeparam name="T">Generic type argument, representing abstraction of IEntity</typeparam>
-    public sealed class Repository<T> : IRepository<T>
-        where T : class
+    private readonly AppDbContext _appDbContext;
+
+    public Repository(IUnitOfWork unitOfWork)
     {
-        private const string _argumentMissingErrorMessage = "Argument is null.";
-        private readonly AppDbContext _appDbContext;
+        _appDbContext = unitOfWork.Context as AppDbContext;
+    }
 
-        public Repository(IUnitOfWork unitOfWork)
+    public IQueryable<T> AsQueryable(bool trackEntity = true)
+    {
+        var query = _appDbContext.Set<T>().AsQueryable();
+        if (!trackEntity)
         {
-            _appDbContext = unitOfWork.Context as AppDbContext;
+            query = query.AsNoTracking();
         }
+        return query;
+    }
 
-        public IQueryable<T> AsQueryable(bool trackEntity = true)
+    public void Add(T item)
+    {
+        ArgumentNullException.ThrowIfNull(item, nameof(item));
+        _appDbContext.Set<T>().Add(item);
+    }
+
+    public async Task AddAsync(T item, CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(item, nameof(item));
+        await _appDbContext.Set<T>().AddAsync(item, cancellationToken);
+    }
+
+    public void Delete(T item)
+    {
+        ArgumentNullException.ThrowIfNull(item, nameof(item));
+        _appDbContext.Set<T>().Remove(item);
+    }
+
+    public void DeleteBatch(IEnumerable<T> items)
+    {
+        if (items?.Any() ?? false)
         {
-            var query = _appDbContext.Set<T>().AsQueryable();
-            if (!trackEntity)
-            {
-                query = query.AsNoTracking();
-            }
-            return query;
+            _appDbContext.Set<T>().RemoveRange(items);
         }
+    }
 
-        public void Add(T item)
+    public T Get(Expression<Func<T, bool>> expression, bool trackEntity = true)
+    {
+        IQueryable<T> query = _appDbContext.Set<T>();
+        if (!trackEntity)
         {
-            if (item == null)
-                throw new ArgumentException(_argumentMissingErrorMessage);
-
-            _appDbContext.Set<T>().Add(item);
+            query = query.AsNoTracking();
         }
-
-        public async Task AddAsync(T item, CancellationToken cancellationToken = default)
+        if (expression != null)
         {
-            if (item == null)
-                throw new ArgumentException(_argumentMissingErrorMessage);
-
-            await _appDbContext.Set<T>().AddAsync(item, cancellationToken);
+            query = query.Where(expression);
         }
+        return query.FirstOrDefault();
+    }
 
-        public void Delete(T item)
+    public T Get(Expression<Func<T, bool>> expression, bool trackEntity = true, params Expression<Func<T, object>>[] includes)
+    {
+        IQueryable<T> query = _appDbContext.Set<T>();
+        if (!trackEntity)
         {
-            if (item == null)
-                throw new ArgumentException(_argumentMissingErrorMessage);
-
-            _appDbContext.Set<T>().Remove(item);
+            query = query.AsNoTracking();
         }
-
-        public void DeleteBatch(IEnumerable<T> items)
+        foreach (var include in includes)
         {
-            if (items?.Any() ?? false)
-            {
-                _appDbContext.Set<T>().RemoveRange(items);
-            }
+            query = query.Include(include);
         }
-
-        public T Get(Expression<Func<T, bool>> expression, bool trackEntity = true)
+        if (expression != null)
         {
-            IQueryable<T> query = _appDbContext.Set<T>();
-            if (!trackEntity)
-            {
-                query = query.AsNoTracking();
-            }
-            if (expression != null)
-            {
-                query = query.Where(expression);
-            }
-            return query.FirstOrDefault();
+            query = query.Where(expression);
         }
+        return query.FirstOrDefault();
+    }
 
-        public T Get(Expression<Func<T, bool>> expression, bool trackEntity = true, params Expression<Func<T, object>>[] includes)
+    public async Task<T> GetAsync(Expression<Func<T, bool>> expression, bool trackEntity = true, CancellationToken cancellationToken = default)
+    {
+        IQueryable<T> query = _appDbContext.Set<T>();
+        if (!trackEntity)
         {
-            IQueryable<T> query = _appDbContext.Set<T>();
-            if (!trackEntity)
-            {
-                query = query.AsNoTracking();
-            }
-            foreach (var include in includes)
-            {
-                query = query.Include(include);
-            }
-            if (expression != null)
-            {
-                query = query.Where(expression);
-            }
-            return query.FirstOrDefault();
+            query = query.AsNoTracking();
         }
-
-        public async Task<T> GetAsync(Expression<Func<T, bool>> expression, bool trackEntity = true, CancellationToken cancellationToken = default)
+        if (expression != null)
         {
-            IQueryable<T> query = _appDbContext.Set<T>();
-            if (!trackEntity)
-            {
-                query = query.AsNoTracking();
-            }
-            if (expression != null)
-            {
-                query = query.Where(expression);
-            }
-            return await query.FirstOrDefaultAsync(cancellationToken);
+            query = query.Where(expression);
         }
+        return await query.FirstOrDefaultAsync(cancellationToken);
+    }
 
-        public async Task<T> GetAsync(Expression<Func<T, bool>> expression, bool trackEntity = true, CancellationToken cancellationToken = default, params Expression<Func<T, object>>[] includes)
+    public async Task<T> GetAsync(Expression<Func<T, bool>> expression, bool trackEntity = true, CancellationToken cancellationToken = default, params Expression<Func<T, object>>[] includes)
+    {
+        IQueryable<T> query = _appDbContext.Set<T>();
+        if (!trackEntity)
         {
-            IQueryable<T> query = _appDbContext.Set<T>();
-            if (!trackEntity)
-            {
-                query = query.AsNoTracking();
-            }
-            foreach (var include in includes)
-            {
-                query = query.Include(include);
-            }
-            if (expression != null)
-            {
-                query = query.Where(expression);
-            }
-            return await query.FirstOrDefaultAsync(cancellationToken);
+            query = query.AsNoTracking();
         }
-
-        public void Update(T item)
+        foreach (var include in includes)
         {
-            if (item == null)
-                throw new ArgumentException(_argumentMissingErrorMessage);
-
-            _appDbContext.Set<T>().Attach(item);
-            _appDbContext.Entry<T>(item).State = EntityState.Modified;
+            query = query.Include(include);
         }
-
-        public void Dispose()
+        if (expression != null)
         {
-            if (_appDbContext != null)
-                _appDbContext.Dispose();
+            query = query.Where(expression);
         }
+        return await query.FirstOrDefaultAsync(cancellationToken);
+    }
+
+    public void Update(T item)
+    {
+        ArgumentNullException.ThrowIfNull(item, nameof(item));
+        _appDbContext.Set<T>().Attach(item);
+        _appDbContext.Entry<T>(item).State = EntityState.Modified;
+    }
+
+    public void Dispose()
+    {
+        if (_appDbContext != null)
+            _appDbContext.Dispose();
     }
 }
