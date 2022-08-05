@@ -1,8 +1,7 @@
-﻿namespace NET.Core.Library.Domain.Infrastructure.Contracts
+﻿namespace NET.Core.Library.Domain.Infrastructure.Contracts;
+
+public interface IEntity<Tkey>
 {
-    public interface IEntity<Tkey>
-    {
-        // Needed in Generic Repository Pattern
-        public Tkey Id { get; set; }
-    }
+    // Needed in Generic Repository Pattern
+    public Tkey Id { get; set; }
 }
