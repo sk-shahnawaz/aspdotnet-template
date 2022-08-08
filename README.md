@@ -26,7 +26,6 @@ Please read [CONTRIBUTING.md](/CONTRIBUTING.md) before starting to contribute in
 
 - Git Version Control System
 - .NET 6 SDK & Runtime
-- .NET CLI v 6.0.0+
 - EF Core Command Line Tool v 6.0.0+
 - PostgreSQL v13.2 / SQL Server 2017 Express Edition+ with SQL Server Authentication enabled
 - Visual Studio 2022 Community Edition / Visual Studio Code with OmniSharp extension installed / JetBrains Rider
