@@ -49,6 +49,8 @@ This is main web API project containing all the API resources.
 | SQLPASSWORD | SQL Server password |
 | SQLUSER | SQL Server user name |
 | SQLDATABASE | SQL Server database name |
+| NEW_RELIC_APP_NAME | Application name for tracking in New Relic web UI |
+| NEW_RELIC_LICENSE_KEY | New relic license key |
 
 ## Build & Run Process 	
 
