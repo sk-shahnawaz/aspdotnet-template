@@ -1,0 +1,51 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+<PropertyGroup>
+<TargetFramework>net10.0</TargetFramework>
+<RootNamespace>ASP.NET.Core.WebAPI</RootNamespace>
+<UserSecretsId>cf514444-a2ab-4e72-b9bf-665a3ea2ef35</UserSecretsId>
+<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+<DockerfileContext>.</DockerfileContext>
+</PropertyGroup>
+
+<PropertyGroup>
+<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+<ImplicitUsings>enable</ImplicitUsings>
+<LangVersion>latest</LangVersion>
+<Nullable>enable</Nullable>
+</PropertyGroup>
+
+<PropertyGroup>
+<GenerateDocumentationFile>true</GenerateDocumentationFile>
+<NoWarn>$(NoWarn);1591;ASPDEPR006</NoWarn>
+<Company>Shahnawaz-QI</Company>
+<Description>Sample ASP.NET Core Web API project.</Description>
+<Authors>Sk Shahnawaz-ul Haque</Authors>
+</PropertyGroup>
+
+<ItemGroup>
+<PackageReference Include="Asp.Versioning.Mvc" Version="8.1.1" />
+<PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.1.1" />
+<PackageReference Include="AutoMapper" Version="16.1.1" />
+<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="10.0.6" />
+<PackageReference Include="Microsoft.AspNetCore.OData" Version="9.4.1" />
+<PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.6" />
+<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.6">
+<PrivateAssets>all</PrivateAssets>
+<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+</PackageReference>
+<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="10.0.6" />
+<PackageReference Include="Sentry.Extensions.Logging" Version="6.4.0" />
+<PackageReference Include="Serilog.AspNetCore" Version="10.0.0" />
+<PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.7" />
+<PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="10.1.7" />
+<PackageReference Include="Swashbuckle.AspNetCore.Newtonsoft" Version="10.1.7" />
+</ItemGroup>
+
+<ItemGroup>
+<ProjectReference Include="..\NET-Core.Console.DB.PostgreSQL\NET-Core.Console.DB.PostgreSQL.csproj" />
+<ProjectReference Include="..\NET-Core.Console.DB.SqlServer\NET-Core.Console.DB.SqlServer.csproj" />
+<ProjectReference Include="..\NET-Core.Library.Domain\NET-Core.Library.Domain.csproj" />
+</ItemGroup>
+
+</Project>

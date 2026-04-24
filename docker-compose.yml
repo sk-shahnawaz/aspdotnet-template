@@ -35,7 +35,7 @@ services:
   container_name: db-migration
   build:
    context: /.
-   dockerfile: ./NET-Core.Console.DB.PostgreSQL/Dockerfile
+   dockerfile: ./src/NET-Core.Console.DB.PostgreSQL/Dockerfile
   networks:
     - appnetwork
   environment:
