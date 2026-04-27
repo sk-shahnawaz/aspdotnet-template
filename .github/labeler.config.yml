@@ -1,14 +1,27 @@
 IaC:
-  - pulumi/**/*
+  - changed-files:
+    - any-glob-to-any-file: 'pulumi/**/*'
 
 Documentation:
-  - any: ['./*.md', 'docs/*']
+  - changed-files:
+    - any-glob-to-any-file:
+      - '*.md'
+      - 'docs/**/*'
 
 Scripts:
-  - any: ['Scripts/**/*', './*.sh', './*.ps1']
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'Scripts/**/*'
+      - '*.sh'
+      - '*.ps1'
 
 Configuration:
-  - any: ['./*.yml', './*.yaml', './.*']
+  - changed-files:
+    - any-glob-to-any-file:
+      - '*.yml'
+      - '*.yaml'
+      - '.**'
 
 CI/CD:
-  - any: ['.github/workflows/*']
+  - changed-files:
+    - any-glob-to-any-file: '.github/workflows/**/*'
