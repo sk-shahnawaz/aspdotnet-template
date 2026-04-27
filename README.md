@@ -7,7 +7,7 @@ Best practices related to .NET Development have been followed while developing t
 
 ## Badges
 
-![build](https://github.com/shahnawaz-qi/aspdotnet-template/actions/workflows/build.yml/badge.svg)
+![build](https://github.com/sk-shahnawaz/aspdotnet-template/actions/workflows/build.yml/badge.svg)
 
 ## Contributions
 
@@ -25,8 +25,8 @@ Please read [CONTRIBUTING.md](/CONTRIBUTING.md) before starting to contribute in
 ##  Pre-requisites
 
 - Git Version Control System
-- .NET 6 SDK & Runtime
-- EF Core Command Line Tool v 6.0.0+
+- .NET 10 SDK & Runtime
+- EF Core Command Line Tool v 10.0.0+
 - PostgreSQL v13.2 / SQL Server 2017 Express Edition+ with SQL Server Authentication enabled
 - Visual Studio 2022 Community Edition / Visual Studio Code with OmniSharp extension installed / JetBrains Rider
 - Docker v20.10.6 build 370c289 or above

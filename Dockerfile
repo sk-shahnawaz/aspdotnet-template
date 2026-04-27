@@ -1,16 +1,17 @@
-#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
-
-FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS base
 WORKDIR /app
-EXPOSE 80
-EXPOSE 443
+EXPOSE 8080
+EXPOSE 8081
 
-FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
-COPY ["ASP.NET-Core.WebAPI/ASP.NET-Core.WebAPI.csproj", "ASP.NET-Core.WebAPI/"]
-RUN dotnet restore "ASP.NET-Core.WebAPI/ASP.NET-Core.WebAPI.csproj"
+COPY ["src/ASP.NET-Core.WebAPI/ASP.NET-Core.WebAPI.csproj", "src/ASP.NET-Core.WebAPI/"]
+COPY ["src/NET-Core.Library.Domain/NET-Core.Library.Domain.csproj", "src/NET-Core.Library.Domain/"]
+COPY ["src/NET-Core.Console.DB.PostgreSQL/NET-Core.Console.DB.PostgreSQL.csproj", "src/NET-Core.Console.DB.PostgreSQL/"]
+COPY ["src/NET-Core.Console.DB.SqlServer/NET-Core.Console.DB.SqlServer.csproj", "src/NET-Core.Console.DB.SqlServer/"]
+RUN dotnet restore "src/ASP.NET-Core.WebAPI/ASP.NET-Core.WebAPI.csproj"
 COPY . .
-WORKDIR "/src/ASP.NET-Core.WebAPI"
+WORKDIR "/src/src/ASP.NET-Core.WebAPI"
 RUN dotnet build "ASP.NET-Core.WebAPI.csproj" -c Release -o /app/build
 
 FROM build AS publish

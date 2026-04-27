@@ -6,18 +6,18 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     steps:
       - name: Checkout Source Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 1
-      - name: Set .NET 6 SDK
-        uses: actions/setup-dotnet@v2
+      - name: Set .NET 10 SDK
+        uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 6.0.x
+          dotnet-version: 10.0.x
           include-prerelease: false
-      - name: Get .NET Version Information & Nuget Sources
+      - name: Get .NET Version Information & NuGet Sources
         run: |
           dotnet nuget list source
           dotnet --version
@@ -26,12 +26,12 @@ jobs:
       - name: Build with .NET
         run: dotnet build --force --verbosity minimal --configuration Release --no-restore
       - name: Test with .NET
-        working-directory: ./NET-Core.XUnit.UnitTests
+        working-directory: ./src/NET-Core.XUnit.UnitTests
         run: dotnet test --settings "test.runsettings" --configuration Release
       - name: Publish with .NET
         run: dotnet publish --configuration Release --no-build
       - name: Upload Publish Artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
             name: aspdotnet-template_publish_artifacts
-            path: /home/runner/work/aspdotnet-template/aspdotnet-template/ASP.NET-Core.WebAPI/bin/Release/net5.0/publish
+            path: /home/runner/work/aspdotnet-template/aspdotnet-template/src/ASP.NET-Core.WebAPI/bin/Release/net10.0/publish

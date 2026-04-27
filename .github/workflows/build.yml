@@ -4,18 +4,18 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     steps:
       - name: Checkout Source Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 1
-      - name: Set .NET 6 SDK
-        uses: actions/setup-dotnet@v2
+      - name: Set .NET 10 SDK
+        uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 6.0.x
+          dotnet-version: 10.0.x
           include-prerelease: false
-      - name: Get .NET Version Information & Nuget Sources
+      - name: Get .NET Version Information & NuGet Sources
         run: |
           dotnet nuget list source
           dotnet --version
@@ -24,11 +24,11 @@ jobs:
       - name: Build with .NET
         run: dotnet build --force --verbosity minimal --configuration Release --no-restore
       - name: Test with .NET
-        run: dotnet test ./Template.sln --no-build --verbosity normal --configuration Release --settings "./NET-Core.XUnit.UnitTests/test.runsettings" /p:CollectCoverage=true /p:Exclude="[NET*.Console.*]*" --collect:"XPlat Code Coverage" --results-directory test-coverage
+        run: dotnet test ./Template.sln --no-build --verbosity normal --configuration Release --settings "./src/NET-Core.XUnit.UnitTests/test.runsettings" /p:CollectCoverage=true /p:Exclude="[NET*.Console.*]*" --collect:"XPlat Code Coverage" --results-directory test-coverage
       - name: Copy Coverage To Predictable Location
         run: cp test-coverage/*/coverage.cobertura.xml test-coverage/coverage.cobertura.xml
       - name: Code Coverage Summary Report
-        uses: irongut/CodeCoverageSummary@v1.0.2
+        uses: irongut/CodeCoverageSummary@v1.3.0
         with:
           filename: test-coverage/coverage.cobertura.xml
           badge: true

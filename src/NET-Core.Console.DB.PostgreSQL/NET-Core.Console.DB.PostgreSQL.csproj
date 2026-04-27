@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+<PropertyGroup>
+<OutputType>Exe</OutputType>
+<TargetFramework>net10.0</TargetFramework>
+<RootNamespace>NET.Core.Console.DB.PostgreSQL</RootNamespace>
+<Company>sk-shahnawaz</Company>
+<Description>Sample PostgreSQL database specific project.</Description>
+<Authors>Sk Shahnawaz Ul Haque</Authors>
+</PropertyGroup>
+
+<PropertyGroup>
+<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+<ImplicitUsings>enable</ImplicitUsings>
+<LangVersion>latest</LangVersion>
+<Nullable>enable</Nullable>
+</PropertyGroup>
+
+<ItemGroup>
+<PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.6" />
+<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.6">
+<PrivateAssets>all</PrivateAssets>
+<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+</PackageReference>
+<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.6">
+<PrivateAssets>all</PrivateAssets>
+<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+</PackageReference>
+<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="10.0.6" />
+<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.1" />
+</ItemGroup>
+
+<ItemGroup>
+<ProjectReference Include="..\NET-Core.Library.Domain\NET-Core.Library.Domain.csproj" />
+</ItemGroup>
+
+<ItemGroup>
+<None Update="Properties\launchSettings.json">
+<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+<CopyToPublishDirectory>Never</CopyToPublishDirectory>
+</None>
+</ItemGroup>
+
+</Project>
