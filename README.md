@@ -31,7 +31,7 @@ Please read [CONTRIBUTING.md](/CONTRIBUTING.md) before starting to contribute in
 - Visual Studio 2022 Community Edition / Visual Studio Code with OmniSharp extension installed / JetBrains Rider
 - Docker v20.10.6 build 370c289 or above
 - Docker Compose v3.7+
-- Additional setup needed for generating unit test coverage reports [described here](/NET-Core.XUnit.UnitTests#generating-code-coverage-report)
+- Additional setup needed for generating unit test coverage reports [described here](/src/NET-Core.XUnit.UnitTests#generating-code-coverage-report)
 
 ## Structure
 
@@ -39,11 +39,11 @@ Please read [CONTRIBUTING.md](/CONTRIBUTING.md) before starting to contribute in
 
 | Project Type | Project Name | Usage |
 |--------------|--------------|-------|
-| ASP.NET Core Web API | [ASP.NET-Core.WebAPI](/ASP.NET-Core.WebAPI) | Main web API project | 
-| .NET Core Class Library | [NET-Core.Library.Domain](/NET-Core.Library.Domain) | Application domain logic de-coupled |
-| .NET Core Console Application | [NET-Core.Console.DB.PostgreSQL](/NET-Core.Console.DB.PostgreSQL) | Sample PostgreSQL database configurations with Entity Framework (EF) Core migration pre-configured |
-| .NET Core Console Application | [NET-Core.Console.DB.SqlServer](/NET-Core.Console.DB.SqlServer) | Sample SQL Server database configurations with Entity Framework (EF) Core migration pre-configured |
-| XUnit | [NET-Core.XUnit.UnitTests](/NET-Core.XUnit.UnitTests) | Unit testing project |
+| ASP.NET Core Web API | [ASP.NET-Core.WebAPI](/src/ASP.NET-Core.WebAPI) | Main web API project | 
+| .NET Core Class Library | [NET-Core.Library.Domain](/src/NET-Core.Library.Domain) | Application domain logic de-coupled |
+| .NET Core Console Application | [NET-Core.Console.DB.PostgreSQL](/src/NET-Core.Console.DB.PostgreSQL) | Sample PostgreSQL database configurations with Entity Framework (EF) Core migration pre-configured |
+| .NET Core Console Application | [NET-Core.Console.DB.SqlServer](/src/NET-Core.Console.DB.SqlServer) | Sample SQL Server database configurations with Entity Framework (EF) Core migration pre-configured |
+| XUnit | [NET-Core.XUnit.UnitTests](/src/NET-Core.XUnit.UnitTests) | Unit testing project |
 
 ### Repository Root Miscellaneous Items
 
