@@ -3,9 +3,9 @@
 <PropertyGroup>
 <TargetFramework>net10.0</TargetFramework>
 <RootNamespace>NET.Core.Library.Domain</RootNamespace>
-<Company>Shahnawaz-QI</Company>
+<Company>sk-shahnawaz</Company>
 <Description>Sample domain project.</Description>
-<Authors>Sk Shahnawaz-ul Haque</Authors>
+<Authors>Sk Shahnawaz Ul Haque</Authors>
 </PropertyGroup>
 
 <PropertyGroup>

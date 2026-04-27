@@ -4,9 +4,9 @@
 <TargetFramework>net10.0</TargetFramework>
 <RootNamespace>NET.Core.XUnit.UnitTests</RootNamespace>
 <IsPackable>false</IsPackable>
-<Company>Shahnawaz-QI</Company>
+<Company>sk-shahnawaz</Company>
 <Description>Sample Unit Test project.</Description>
-<Authors>Sk Shahnawaz-ul Haque</Authors>
+<Authors>Sk Shahnawaz Ul Haque</Authors>
 </PropertyGroup>
 
 <PropertyGroup>

@@ -4,9 +4,9 @@
 <OutputType>Exe</OutputType>
 <TargetFramework>net10.0</TargetFramework>
 <RootNamespace>NET.Core.Console.DB.PostgreSQL</RootNamespace>
-<Company>Shahnawaz-QI</Company>
+<Company>sk-shahnawaz</Company>
 <Description>Sample PostgreSQL database specific project.</Description>
-<Authors>Sk Shahnawaz-ul Haque</Authors>
+<Authors>Sk Shahnawaz Ul Haque</Authors>
 </PropertyGroup>
 
 <PropertyGroup>

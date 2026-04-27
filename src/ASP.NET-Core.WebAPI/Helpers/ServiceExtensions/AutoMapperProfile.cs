@@ -4,7 +4,7 @@ using ASP.NET.Core.WebAPI.Models.DTOs;
 
 namespace ASP.NET.Core.WebAPI.Helpers.ServiceExtensions;
 
-internal sealed class AutoMapperProfile : Profile
+public sealed class AutoMapperProfile : Profile
 {
     public AutoMapperProfile()
     {

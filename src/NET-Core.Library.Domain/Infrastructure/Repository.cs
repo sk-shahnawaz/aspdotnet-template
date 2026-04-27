@@ -13,11 +13,11 @@ namespace NET.Core.Library.Domain.Infrastructure;
 public sealed class Repository<T> : IRepository<T>
     where T : class
 {
-    private readonly AppDbContext _appDbContext = null!;
+    private readonly AppDbContext _appDbContext;
 
     public Repository(IUnitOfWork unitOfWork)
     {
-        _appDbContext = (unitOfWork.Context as AppDbContext)!;
+        _appDbContext = unitOfWork.Context as AppDbContext;
     }
 
     public IQueryable<T> AsQueryable(bool trackEntity = true)
@@ -129,7 +129,7 @@ public sealed class Repository<T> : IRepository<T>
 
     public void Dispose()
     {
-        _appDbContext?.Dispose();
-        GC.SuppressFinalize(this);
+        if (_appDbContext != null)
+            _appDbContext.Dispose();
     }
 }
