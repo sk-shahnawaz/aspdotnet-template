@@ -7,7 +7,7 @@ using NET.Core.Library.Domain.Infrastructure.Contracts;
 namespace NET.Core.Library.Domain.Infrastructure;
 
 /// <summary>
-/// Implementor of IRepository&lt;T&gt; abstraction.
+/// Implementor of IRepository abstraction.
 /// </summary>
 /// <typeparam name="T">Generic type argument, representing abstraction of IEntity</typeparam>
 public sealed class Repository<T> : IRepository<T>
