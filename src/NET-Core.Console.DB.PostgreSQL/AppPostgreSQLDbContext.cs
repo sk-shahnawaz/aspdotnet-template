@@ -44,7 +44,6 @@ public sealed class AppPostgreSQLDbContext : AppDbContext
             Username = ReadEnvironmentVariable("PGUSER", string.Empty),
             Password = ReadEnvironmentVariable("PGPASSWORD", string.Empty),
             PersistSecurityInfo = false,
-            TrustServerCertificate = true,
             Pooling = true
         };
         _pgVersion = ReadEnvironmentVariable("PGVERSION", "11.8");
