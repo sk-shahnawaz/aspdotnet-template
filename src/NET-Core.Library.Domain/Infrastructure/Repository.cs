@@ -13,7 +13,7 @@ namespace NET.Core.Library.Domain.Infrastructure;
 public sealed class Repository<T> : IRepository<T>
     where T : class
 {
-    private readonly AppDbContext _appDbContext;
+    private readonly AppDbContext _appDbContext = null!;
 
     public Repository(IUnitOfWork unitOfWork)
     {
@@ -131,5 +131,6 @@ public sealed class Repository<T> : IRepository<T>
     {
         if (_appDbContext != null)
             _appDbContext.Dispose();
+        GC.SuppressFinalize(this);
     }
 }
